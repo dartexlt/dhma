@@ -10,10 +10,10 @@
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="/ma">Multicriteria Analysis</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link contacts" href="#">Contacts</a>
+        <a class="nav-link contacts" href="/calc/create">Contacts</a>
     </li>
 </ul>
 <form class="form-inline my-2 my-lg-0">

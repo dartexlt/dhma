@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PagesController@getIndex');
+Route::get('/ma', 'PagesController@getMA');
+Route::resource('calc', 'CalculationController');
