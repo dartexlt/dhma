@@ -1,7 +1,10 @@
 @extends('main')
 @section('title', 'Multicriteria Analysis')
+@section('stylesheets')
+<link rel="stylesheet" href="/css/parsley.css">
+@endsection
 @section('content')
-<form method="post" action="{{url('calc')}}">
+<form method="post" action="{{url('calc')}}" data-parsley-validate>
 	<div class="container">
 		<div class ="row">
 			<div class="col-md-1">
@@ -30,7 +33,7 @@
 		@include('inputform',['month' => 'August'])
 		@include('inputform',['month' => 'September'])
 		@include('inputform',['month' => 'October'])
-		@include('inputform',['month' => 'Novenber'])
+		@include('inputform',['month' => 'November'])
 		@include('inputform',['month' => 'December'])
         {{csrf_field()}}
 		<div class="row" >
@@ -38,4 +41,7 @@
 		</div>
 	</div>
 </form>
+@endsection
+@section('scripts')
+<link rel="stylesheet" href="/js/parsley.min.js">
 @endsection

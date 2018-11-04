@@ -25,7 +25,7 @@ class CreateMonthsTable extends Migration
             $table->float('april')->nullable();
             $table->float('may')->nullable();
             $table->float('june')->nullable();
-            $table->float('jully')->nullable();
+            $table->float('july')->nullable();
             $table->float('august')->nullable();
             $table->float('september')->nullable();
             $table->float('october')->nullable();
