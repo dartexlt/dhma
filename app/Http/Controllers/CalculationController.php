@@ -106,7 +106,8 @@ class CalculationController extends Controller
      */
     public function show($id)
     {
-        return view('result');
+        $model= HeatModel::find($id);
+        return view('result')->withModel($model);
     }
 
     /**

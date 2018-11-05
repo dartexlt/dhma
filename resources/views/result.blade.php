@@ -16,4 +16,6 @@
 			</ul>
 		</div>
 	@endif
+	<h1> {{$model->nhv}}</h1>
+	<h1> {{$model->nhv}}</h1>
 @endsection
