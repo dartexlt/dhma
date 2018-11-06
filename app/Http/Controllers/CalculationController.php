@@ -91,8 +91,6 @@ class CalculationController extends Controller
         $month->december=$request->tDecember;
         $month->parameter_id=3;
         $month->save();
-        $hm->nhv=2;
-        $hm->save();
         Session::flash('success','Data successfully saved');
         //return view('MA');
         return redirect()->route('calc.show',$hm->id);

@@ -17,5 +17,6 @@
 		</div>
 	@endif
 	<h1> {{$model->nhv}}</h1>
-	<h1> {{$model->nhv}}</h1>
+<h1> {{$model->months->where('parameter_id', '2')}}</h1>
+	
 @endsection
