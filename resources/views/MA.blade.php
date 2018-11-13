@@ -5,6 +5,7 @@
 @endsection
 @section('content')
 <form method="post" action="{{url('calc')}}" data-parsley-validate>
+	@csrf
 	<div class="container">
 		<div class ="row">
 			<div class="col-md-1">

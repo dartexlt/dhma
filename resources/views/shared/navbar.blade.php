@@ -13,7 +13,7 @@
             <a class="nav-link" href="/ma">Multicriteria Analysis</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link contacts" href="/calc/create">Contacts</a>
+        <a class="nav-link contacts" href="/data/create">Contacts</a>
     </li>
 </ul>
 <form class="form-inline my-2 my-lg-0">
