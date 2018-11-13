@@ -16,8 +16,8 @@
 			</ul>
 		</div>
 	@endif
-	<h1> {{$arr}}</h1>
-	{!! Form::open([''=>'']) !!}
-		
-	{!! Form::close() !!}
+	<h1> {{$Nhv}}</h1>
+	@foreach ($Q as $q)
+    	<h1>{{$q}}</h1>
+	@endforeach
 @endsection

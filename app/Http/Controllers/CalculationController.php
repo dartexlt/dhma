@@ -36,7 +36,8 @@ class CalculationController extends Controller
         
 
 		/*$arr = array_add($request, 'Nhv'=>$Nhv);*/
-        return redirect()->route('calc.result',[$Nhv]);
+        /*return redirect()->route('calc.result',compact('Q','h','t','N','Nhv'));*/
+        return view('calc.result',compact('Q','h','t','N','Nhv'));
 
        
     }
