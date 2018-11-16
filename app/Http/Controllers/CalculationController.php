@@ -24,12 +24,26 @@ class CalculationController extends Controller
         }
         $heatingSeason=array(1,1,1,1,0,0,0,0,0,1,1,1);
         $temp=0;
+        $sumxy=0;
+        $sumx=0;
+        $sumy=0;
+        $sumxx=0;
+        $sumn=0;
         $Nhv=0;
         foreach ($N as $key => $value) {
         	if ($heatingSeason[$key]==0){
         		$Nhv=$Nhv+$N[$key];
         		$temp=$temp+1;
         	}
+        	else{
+        		$sumn=$sumn+1;
+        		$sumxy=$sumxy+$t[$key]*$N[$key];
+        		$sumx=$sumx+$t[$key];
+        		$sumy=$sumy+$N[$key];
+        		$sumxx=$sumxx+$t[$key]*$t[$key];
+        	}
+        	$a=($sumn*$sumxy-$sumx*$sumy)/($sumn*$sumxx-$sumx*$sumx);
+        	$b=
         }
         $Nhv=$Nhv/$temp;
 
