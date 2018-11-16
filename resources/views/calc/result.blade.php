@@ -17,7 +17,9 @@
 		</div>
 	@endif
 	<h1> {{$Nhv}}</h1>
-	@foreach ($Q as $q)
-    	<h1>{{$q}}</h1>
+	<h1> {{$a}}</h1>
+	<h1> {{$b}}</h1>
+	@foreach ($Nfixed as $T)
+    	<h1>{{$T}}</h1>
 	@endforeach
 @endsection

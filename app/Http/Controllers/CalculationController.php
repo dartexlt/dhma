@@ -34,24 +34,27 @@ class CalculationController extends Controller
         	if ($heatingSeason[$key]==0){
         		$Nhv=$Nhv+$N[$key];
         		$temp=$temp+1;
-        	}
-        	else{
+        	}else{
         		$sumn=$sumn+1;
         		$sumxy=$sumxy+$t[$key]*$N[$key];
         		$sumx=$sumx+$t[$key];
         		$sumy=$sumy+$N[$key];
         		$sumxx=$sumxx+$t[$key]*$t[$key];
         	}
-        	$a=($sumn*$sumxy-$sumx*$sumy)/($sumn*$sumxx-$sumx*$sumx);
-        	$b=
+        	
         }
         $Nhv=$Nhv/$temp;
-
-        
+        $a=(($sumn*$sumxy)-($sumx*$sumy))/(($sumn*$sumxx)-($sumx*$sumx));
+        $b=($sumy-$a*$sumx)/$sumn;
+        $tfixed=array(8,5,0,-5,-10,-15,-20,-25);
+		$Nfixed=array($Nhv,$Nhv);
+		foreach ($tfixed as $key => $value) {
+        	$Nfixed[$key+2]=$a*$tfixed[$key]+$b;
+        }
 
 		/*$arr = array_add($request, 'Nhv'=>$Nhv);*/
         /*return redirect()->route('calc.result',compact('Q','h','t','N','Nhv'));*/
-        return view('calc.result',compact('Q','h','t','N','Nhv'));
+        return view('calc.result',compact('Q','h','t','N','Nhv','a','b','Nfixed'));
 
        
     }
