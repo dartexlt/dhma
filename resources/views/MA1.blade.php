@@ -44,16 +44,16 @@
 			</div>
 			<div class="col-md-4">
 				<label>Climate data</label>
-				@include('climate_data_input',['title' => 'h83'])
-				@include('climate_data_input',['title' => 'h82'])
-				@include('climate_data_input',['title' => 'h8'])
-				@include('climate_data_input',['title' => 'h5'])
-				@include('climate_data_input',['title' => 'h0'])
-				@include('climate_data_input',['title' => 'h_5'])
-				@include('climate_data_input',['title' => 'h_10'])
-				@include('climate_data_input',['title' => 'h_15'])
-				@include('climate_data_input',['title' => 'h_20'])
-				@include('climate_data_input',['title' => 'h_25'])
+				@include('climate_data_input',['title' => 'h83','value'=>'8760'])
+				@include('climate_data_input',['title' => 'h82','value'=>'4872'])
+				@include('climate_data_input',['title' => 'h8','value'=>'4872'])
+				@include('climate_data_input',['title' => 'h5','value'=>'3989'])
+				@include('climate_data_input',['title' => 'h0','value'=>'2835'])
+				@include('climate_data_input',['title' => 'h_5','value'=>'1050'])
+				@include('climate_data_input',['title' => 'h_10','value'=>'518'])
+				@include('climate_data_input',['title' => 'h_15','value'=>'305'])
+				@include('climate_data_input',['title' => 'h_20','value'=>'104'])
+				@include('climate_data_input',['title' => 'h_25','value'=>'14'])
 			</div>
         </div>
 

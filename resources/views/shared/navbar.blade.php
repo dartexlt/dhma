@@ -9,8 +9,16 @@
           <li class="nav-item active">
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/ma">Multicriteria Analysis</a>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Multicriteria Analysis
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/ma1">1 Method</a>
+              <a class="dropdown-item" href="/ma2">2 Method</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else</a>
+            </div>
         </li>
         <li class="nav-item">
         <a class="nav-link contacts" href="/data/create">Contacts</a>

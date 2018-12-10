@@ -52,7 +52,6 @@ class CalculationController extends Controller
         		$sumy=$sumy+$N[$key];
         		$sumxx=$sumxx+$t[$key]*$t[$key];
         	}
-        	
         }
         $Nhv=$Nhv/$temp;
         $a=(($sumn*$sumxy)-($sumx*$sumy))/(($sumn*$sumxx)-($sumx*$sumx));
@@ -88,6 +87,39 @@ class CalculationController extends Controller
         /*return redirect()->route('calc.result',compact('Q','h','t','N','Nhv'));*/
         //return view('calc.result',compact('Q','h','t','N','Nhv','a','b','Nfixed'));
         return view('calc.result');
+      
+    }
+
+
+ public function calculate2(Request $request)
+    {
+       $this->validate($request, array());
+        $hnr= array($request->h83, $request->h82, $request->h8, $request->h5, $request->h0, $request->h_5, $request->h_10, $request->h_15, $request->h_20, $request->h_25);
+         $tfixed=array(8,5,0,-5,-10,-15,-20.7,-25);
+         $knr=array();
+		foreach ($tfixed as $key => $value) {
+        	$knr[$key]=($request->tar-$tfixed[$key])/($request->tar-$request->tao);
+        }
+        $N2nr=array($request->N2hw,$request->N2hw);
+        foreach ($tfixed as $key => $value) {
+        	$N2nr[$key+2]=$request->Nave*$knr[$key]+$request->N2hw+$request->Nl;
+        }
+
+
+
+
+        $operating_load = Lava::DataTable();
+		$operating_load->addNumberColumn('Operating Hours [h]')
+           ->addNumberColumn('Heat Load [MW]');
+        foreach ($hnr as $key => $value) {
+			$operating_load->addRow( [$hnr[$key],$N2nr[$key]]);
+        }
+        Lava::LineChart('operating_vs_load', $operating_load, ['title' => 'Operating Hours vs Heat Load', 'hAxis' => ['title' => 'Operating hours per year, [h]'],'vAxis' => ['title' => 'Heat Load, [MW]'], 'legend' => ['position' => 'top', 'alignment'=>'end'], 'lineWidth'=>1, 'pointSize'=>5, 'height'=>300]);
+
+		/*$arr = array_add($request, 'Nhv'=>$Nhv);*/
+        /*return redirect()->route('calc.result',compact('Q','h','t','N','Nhv'));*/
+        //return view('calc.result',compact('Q','h','t','N','Nhv','a','b','Nfixed'));
+        return view('calc.result2');
       
     }
 
