@@ -16,8 +16,9 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="/ma1">1 Method</a>
               <a class="dropdown-item" href="/ma2">2 Method</a>
+              <a class="dropdown-item" href="/ma3">3 Method</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else</a>
+              <a class="dropdown-item" href="/ma">Multicriteria analysis</a>
             </div>
         </li>
         <li class="nav-item">

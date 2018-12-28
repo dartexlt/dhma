@@ -14,7 +14,11 @@
 Route::get('/', 'PagesController@getIndex');
 Route::get('/ma1', 'PagesController@getMA1');
 Route::get('/ma2', 'PagesController@getMA2');
+Route::get('/ma3', 'PagesController@getMA3');
+Route::get('/ma', 'PagesController@getMA');
 Route::resource('data', 'DataController');
 Route::post('calc', 'CalculationController@calculate')->name('calc.compute');
 Route::post('calc2', 'CalculationController@calculate2')->name('calc.compute2');
+Route::post('calc3', 'CalculationController@calculate3')->name('calc.compute3');
+Route::post('calcMA', 'CalculationController@calculateMA')->name('calc.computeMA');
 Route::get('result/{data_array}', 'CalculationController@getResult')->name('calc.result');

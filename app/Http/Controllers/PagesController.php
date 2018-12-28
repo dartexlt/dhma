@@ -12,6 +12,12 @@ class PagesController extends Controller
      public function getMA2(){
     	return view('MA2');
     }
+     public function getMA3(){
+    	return view('MA3');
+    }
+    public function getMA(){
+    	return view('multicriteriaAnalysis');
+    }
     public function getIndex(){
     	return view('welcome');
     }

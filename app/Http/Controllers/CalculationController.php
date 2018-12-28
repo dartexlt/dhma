@@ -122,8 +122,128 @@ class CalculationController extends Controller
         return view('calc.result2');
       
     }
+   
+
+public function calculate3(Request $request)
+    {
+       $this->validate($request, array());
+        $Q=array($request->QJanuary,$request->QFebruary,$request->QMarch,$request->QApril, $request->QMay, $request->QJune, $request->QJuly, $request->QAugust, $request->QSeptember, $request->QOctober, $request->QNovember, $request->QDecember);
+        $Q2=array($request->Q2January,$request->Q2February,$request->Q2March,$request->Q2April, $request->Q2May, $request->Q2June, $request->Q2July, $request->Q2August, $request->Q2September, $request->Q2October, $request->Q2November, $request->Q2December);
+        $h= array($request->hJanuary, $request->hFebruary, $request->hMarch, $request->hApril, $request->hMay, $request->hJune, $request->hJuly, $request->hAugust, $request->hSeptember, $request->hOctober, $request->hNovember, $request->hDecember);
 
 
+        $Edel=0;
+        $Eloss=0;
+        $Q3=array();
+        foreach ($Q as $key => $value) {
+            $Q3[$key]=$Q[$key]-$Q2[$key];
+            $Edel=$Edel+$Q2[$key];
+            $Eloss=$Eloss+$Q3[$key];
+        }
+        $Eaux=15;
+        $Ril=$this->RiL($Eloss,$Eaux,$Edel);
+       //  return view('calc.testResult',compact('Ril'));
+      // return view('calc.result2');
+      
+    }
+
+
+public function calculateMA(Request $request)
+    {
+        //Multicriteria Analysis
+        //test array
+        $data = array
+            (
+            array(1.278,0.44,90.00,0.00,0.00,150.01,0.34,15.30,41),
+            array(1.353,0.44,90.00,100.00,0.00,150.01,0.00,15.30,20),
+            array(1.082,0.44,90.00,100.00,0.00,150.01,0.00,15.30,10),
+            array(1.268,0.51,90.00,0.00,0.00,141.01,0.33,17.32,40),
+            array(1.342,0.51,90.00,100.00,0.00,141.01,0.00,17.32,20),
+            array(1.074,0.51,90.00,100.00,0.00,141.01,0.00,17.32,10),
+            array(1.203,0.60,90.00,0.00,0.00,83.01,0.32,23.09,40),
+            array(1.274,0.60,90.00,100.00,0.00,83.01,0.00,23.09,20),
+            array(1.019,0.60,90.00,100.00,0.00,83.01,0.00,23.09,10),
+            array(1.358,0.44,60.00,0.00,1.00,222.11,0.36,12.70,40),
+            array(1.438,0.44,58.00,100.00,1.00,222.11,0.00,12.70,20),
+            array(1.150,0.44,58.00,100.00,1.00,222.11,0.00,12.70,10),
+            array(1.343,0.51,56.00,0.00,1.00,208.78,0.35,14.43,40),
+            array(1.422,0.51,56.00,100.00,1.00,208.78,0.00,14.43,20),
+            array(1.138,0.51,56.00,100.00,1.00,208.78,0.00,14.43,10),
+            array(1.248,0.60,55.00,0.00,1.00,122.90,0.33,20.21,40),
+            array(1.321,0.60,55.00,100.00,1.00,122.90,0.00,20.21,20),
+            array(1.057,0.60,55.00,100.00,1.00,122.90,0.00,20.21,10)
+        );
+        $w=array(1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9);
+        $m=array(1,0,1,0,0,1,1,1,1);
+        $temp=$this->topsis($data,$w,$m);
+        asort($temp);
+
+        $bar = Lava::DataTable();
+        $bar->addStringColumn('Name')
+           ->addNumberColumn('Rank');
+        foreach ($temp as $key => $value) {
+            $bar->addRow([$key+1,$value]);
+        }
+        Lava::ColumnChart('multicriteria', $bar, ['title' => 'Multicriteria ranking', 'hAxis' => ['title' => 'Region'],'vAxis' => ['title' => 'Rank'], 'height'=>800]);
+        return view('calc.testResult');
+      
+    }
+
+
+
+    public function topsis($matrix, $criteriaWeights,$maximisation)
+    {
+        $row=count($matrix);
+        $col = count($matrix[0]);
+        if (($row>1)&&($col>1)&& (count($criteriaWeights)==$col)&& (count($maximisation)==$col)){
+            $min=array();
+            $max=array();   
+            for ($c = 0; $c < $col; $c++) {
+                $min[$c]=min(array_column($matrix, $c));
+                $max[$c]=max(array_column($matrix, $c));
+            }
+            // matrix normalization and weighting
+            for ($r= 0; $r< $row; $r++) {
+                for ($c = 0; $c < $col; $c++) {
+                    if ($maximisation[$c]==1){
+                        $matrix[$r][$c]=(($max[$c]-$matrix[$r][$c])/($max[$c]-$min[$c]))*$criteriaWeights[$c];
+                    }
+                    else{
+                        $matrix[$r][$c]=(($matrix[$r][$c]-$min[$c])/($max[$c]-$min[$c]))*$criteriaWeights[$c];   
+                    }
+                }
+            } 
+            for ($c = 0; $c < $col; $c++) {
+                $min[$c]=min(array_column($matrix, $c));
+                $max[$c]=max(array_column($matrix, $c));
+            }
+            $splus=array();
+            $sminus=array();
+            for ($r= 0; $r< $row; $r++) {
+                $splus[$r]=0;
+                $sminus[$r]=0;
+                for ($c = 0; $c < $col; $c++) {
+                        $splus[$r]=$splus[$r]+pow($matrix[$r][$c]-$max[$c],2);
+                        $sminus[$r]=$sminus[$r]+pow($matrix[$r][$c]-$min[$c],2);   
+                }
+                $splus[$r]=sqrt($splus[$r]);
+                $sminus[$r]=sqrt($sminus[$r]);
+            }
+            $C=array();
+            for ($r = 0; $r < $row; $r++) {
+                $C[$r]=$sminus[$r]/($sminus[$r]+$splus[$r]);
+            }
+            return $C;
+        }
+    }
+      
+    public function RiL($Eloss, $Eaux, $Edel)
+    {
+        $Ril=($Eloss+$Eaux)/$Edel;
+        return $Ril;   
+    }
+
+    
 /**
      * Display the specified resource.
      *
