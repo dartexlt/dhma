@@ -120,6 +120,7 @@ class CalculationController extends Controller
         /*return redirect()->route('calc.result',compact('Q','h','t','N','Nhv'));*/
         //return view('calc.result',compact('Q','h','t','N','Nhv','a','b','Nfixed'));
         return view('calc.result2');
+        //return $operating_load->toJson();
       
     }
    

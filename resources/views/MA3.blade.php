@@ -50,6 +50,22 @@
 		</div>
 	</div>
 </form>
+
+<script>
+$(document).ready(function(){
+  $(".col-sm-3").click(function(){
+    $(this).hide();
+  });
+});
+</script>
+
+<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+		{{csrf_field()}}
+		<div class="row" >
+              <button type="submit" class="btn btn-primary btn-md">Submit</button>
+		</div>
+
+
 @endsection
 @section('scripts')
 <link rel="stylesheet" href="/js/parsley.min.js">

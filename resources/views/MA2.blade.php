@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/css/parsley.css">
 @endsection
 @section('content')
-<form method="post" action="{{url('calc2')}}" data-parsley-validate>
+<form method="post" id="f1" action="{{url('calc2')}}" data-parsley-validate>
 	@csrf
 	<div class="container">
 		<div class ="row">
@@ -71,6 +71,28 @@
 		</div>
 	</div>
 </form>
+
+{{csrf_field()}}
+		<div class="row" >
+              <button type="submit" id="b2" class="btn btn-primary btn-md">Submit</button>
+		</div>
+
+
+<script>
+$(document).ready(function(){
+	$("#b2").click(function(){
+  		$.ajax({
+   			type: "POST",
+   			url: "{{url('calc2')}}",
+   			data: $(#f1).serialize(),
+   			success: function(msg) {
+     			alert("Form Submitted: " + msg);
+   			}
+ 		});
+ 	});
+});
+</script>
+
 @endsection
 @section('scripts')
 <link rel="stylesheet" href="/js/parsley.min.js">
