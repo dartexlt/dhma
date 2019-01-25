@@ -18,6 +18,9 @@ class PagesController extends Controller
     public function getMA(){
     	return view('multicriteriaAnalysis');
     }
+    public function getModel(){
+        return view('districtModel');
+    }
     public function getIndex(){
     	return view('welcome');
     }

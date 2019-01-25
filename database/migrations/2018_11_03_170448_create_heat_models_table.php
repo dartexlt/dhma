@@ -42,6 +42,15 @@ class CreateHeatModelsTable extends Migration
             $table->float('Nl')->nullable();
             $table->float('tao')->nullable();
             $table->float('tar')->nullable();
+            $table->float('x1')->nullable();
+            $table->float('x2')->nullable();
+            $table->float('x3')->nullable();
+            $table->float('x4')->nullable();
+            $table->float('x5')->nullable();
+            $table->float('x6')->nullable();
+            $table->float('x7')->nullable();
+            $table->float('x8')->nullable();
+            $table->float('x9')->nullable();
             $table->timestamps();
         });
     }
