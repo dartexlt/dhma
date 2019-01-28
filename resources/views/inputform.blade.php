@@ -1,6 +1,6 @@
 <div class="row" >
 			<div class="form-group col-sm-2">
-				<input class="form-check-input" type="checkbox" value="" name={{$month}}>
+				<input class="form-check-input" type="checkbox" value=1.0 name={{$month}}, checked>
 			</div>
 			<div class="form-group col-sm-2">
 				<label for={{$month}} class="col-sm-1 col-form-label col-form-label-sm">{{$month}}</label>

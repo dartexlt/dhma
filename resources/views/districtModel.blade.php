@@ -8,6 +8,14 @@
 	@csrf
 	<div class="container">
 		<div class ="row">
+			<div class="form-group col-sm-2">
+				<label for=district class="col-sm-6 col-form-label col-form-label-sm">District name</label>
+			</div>
+			<div class="form-group col-sm-10">
+				<input type="text" class="form-control form-control-sm" name=district placeholder="e.g. Klaipeda" value="" required data-parsley-value="text">
+			</div>
+		</div>
+		<div class ="row">
 			<div class ="row">
 				<div class="col-sm-2">
 					<label>Heating season</label>
