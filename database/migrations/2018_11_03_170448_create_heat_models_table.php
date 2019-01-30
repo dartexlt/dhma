@@ -19,6 +19,8 @@ class CreateHeatModelsTable extends Migration
             $table->float('nhv')->nullable();
             $table->float('a')->nullable();
             $table->float('b')->nullable();
+            $table->float('N83')->nullable();
+            $table->float('N82')->nullable();
             $table->float('N8')->nullable();
             $table->float('N5')->nullable();
             $table->float('N0')->nullable();

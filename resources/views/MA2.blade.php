@@ -52,16 +52,16 @@
 			</div>
 			<div class="col-md-4">
 				<label>Operating hours for apropriate temperature</label>
-				@include('climate_data_input',['title' => 'h83','value'=>'8760'])
-				@include('climate_data_input',['title' => 'h82','value'=>'4872'])
-				@include('climate_data_input',['title' => 'h8','value'=>'4872'])
-				@include('climate_data_input',['title' => 'h5','value'=>'3989'])
-				@include('climate_data_input',['title' => 'h0','value'=>'2835'])
-				@include('climate_data_input',['title' => 'h_5','value'=>'1050'])
-				@include('climate_data_input',['title' => 'h_10','value'=>'518'])
-				@include('climate_data_input',['title' => 'h_15','value'=>'305'])
-				@include('climate_data_input',['title' => 'h_20','value'=>'104'])
-				@include('climate_data_input',['title' => 'h_25','value'=>'14'])
+				@include('forms.climate_data_input',['title' => 'h83','value'=>'8760'])
+				@include('forms.climate_data_input',['title' => 'h82','value'=>'4872'])
+				@include('forms.climate_data_input',['title' => 'h8','value'=>'4872'])
+				@include('forms.climate_data_input',['title' => 'h5','value'=>'3989'])
+				@include('forms.climate_data_input',['title' => 'h0','value'=>'2835'])
+				@include('forms.climate_data_input',['title' => 'h_5','value'=>'1050'])
+				@include('forms.climate_data_input',['title' => 'h_10','value'=>'518'])
+				@include('forms.climate_data_input',['title' => 'h_15','value'=>'305'])
+				@include('forms.climate_data_input',['title' => 'h_20','value'=>'104'])
+				@include('forms.climate_data_input',['title' => 'h_25','value'=>'14'])
 			</div>
         </div>
 
@@ -72,26 +72,6 @@
 	</div>
 </form>
 
-{{csrf_field()}}
-		<div class="row" >
-              <button type="submit" id="b2" class="btn btn-primary btn-md">Submit</button>
-		</div>
-
-
-<script>
-$(document).ready(function(){
-	$("#b2").click(function(){
-  		$.ajax({
-   			type: "POST",
-   			url: "{{url('calc2')}}",
-   			data: $(#f1).serialize(),
-   			success: function(msg) {
-     			alert("Form Submitted: " + msg);
-   			}
- 		});
- 	});
-});
-</script>
 
 @endsection
 @section('scripts')

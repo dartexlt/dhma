@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class PagesController extends Controller
 {
@@ -19,7 +20,8 @@ class PagesController extends Controller
     	return view('multicriteriaAnalysis');
     }
     public function getModel(){
-        return view('districtModel');
+        $countries = DB::table("countries")->pluck("name","id");
+        return view('districtModel',compact('countries'));
     }
     public function getIndex(){
     	return view('welcome');

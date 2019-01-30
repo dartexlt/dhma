@@ -24,3 +24,8 @@ Route::post('calc3', 'CalculationController@calculate3')->name('calc.compute3');
 Route::post('calcMA', 'CalculationController@calculateMA')->name('calc.computeMA');
 Route::post('model', 'CalculationController@model')->name('calc.model');
 Route::get('result/{data_array}', 'CalculationController@getResult')->name('calc.result');
+
+
+Route::get('dropdownlist','DropdownController@index');
+Route::get('get-state-list','DropdownController@getStateList');
+Route::get('get-city-list','DropdownController@getCityList');
