@@ -25,6 +25,7 @@ Route::post('calcMA', 'CalculationController@calculateMA')->name('calc.computeMA
 Route::post('model', 'CalculationController@model')->name('calc.model');
 Route::get('result/{data_array}', 'CalculationController@getResult')->name('calc.result');
 
+Route::post('/c', 'CalculationController@calculate');
 
 Route::get('dropdownlist','DropdownController@index');
 Route::get('get-state-list','DropdownController@getStateList');

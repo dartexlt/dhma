@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="/css/parsley.css">
 @endsection
 @section('content')
-<form method="post" action="{{url('calc')}}" data-parsley-validate>
+{{-- <form id="form" method="post" action="{{url('calc')}}" data-parsley-validate> --}}
+<form id="form" method="post" data-parsley-validate>
 	@csrf
 	<div class="container">
 		<div class="col-md-8">
@@ -63,7 +64,55 @@
 		</div>
 	</div>
 </form>
+
+
+{{csrf_field()}}
+		<div class="row" >
+              <button id="b1" type="submit" class="btn btn-primary btn-md">Submit</button>
+		</div>
+ <div  class ="row">
+				<div id="f1" class="col-md-4">
+					<label>Heating season</label>
+				</div>
+				<div id="f2" class="col-md-4">
+					<label>Heating load</label>
+				</div>
+			</div>
+	{!! Lava::lavajs() !!}
+	
+	@linechart('temperature_vs_capacity', 'f1')
+	@linechart('operating_vs_load', 'f2')
+ 
+
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+
+    	$('#b1').click(function(){
+
+    		$.ajax({
+    			type: "POST",
+    			url: "/c",
+    			data: $('#form').serialize(),
+    			success: function (dataTableJson) {
+  			 	console.log(dataTableJson);
+              	lava.loadData('temperature_vs_capacity', dataTableJson.data1, function (chart) {
+                		console.log('chart 1 loadData callback');
+                		console.log(chart);
+             	});
+              	lava.loadData('operating_vs_load', dataTableJson.data2, function (chart) {
+              		console.log('chart 2 loadData callback');
+         		console.log(chart);
+ 	 });
+  			 }
+  			});
+  		});
+    });
+</script>
+
+
+
 @endsection
 @section('scripts')
-<link rel="stylesheet" href="/js/parsley.min.js">
+{{-- <link rel="stylesheet" href="/js/parsley.min.js">  --}}
 @endsection

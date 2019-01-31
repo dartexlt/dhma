@@ -30,7 +30,12 @@ class CalculationController extends Controller
         foreach ($Q as $key => $value) {
         	$N[$key]=$Q[$key]/$h[$key];
         }
-        $heatingSeason=array(1,1,1,1,0,0,0,0,0,1,1,1);
+        $heatingSeason=array();
+            $i=0;
+            foreach (array('January', 'February','March','April','May','June','July','August','September','October','November','December') as $tmp) {
+                $heatingSeason[$i]=(int)$request->$tmp;                
+                $i++;
+            }
         $temp=0;
         $sumxy=0;
         $sumx=0;
@@ -90,7 +95,10 @@ class CalculationController extends Controller
 		/*$arr = array_add($request, 'Nhv'=>$Nhv);*/
         /*return redirect()->route('calc.result',compact('Q','h','t','N','Nhv'));*/
         //return view('calc.result',compact('Q','h','t','N','Nhv','a','b','Nfixed'));
-        return view('calc.result');
+        
+        //return view('calc.result');
+
+        return array('data1' => $temp_capacity->toJson(),'data2' => $operating_load->toJson());
       
     }
 
