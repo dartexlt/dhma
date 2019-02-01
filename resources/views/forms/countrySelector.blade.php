@@ -1,29 +1,30 @@
 <div class="container">
-    <div class="panel panel-default">
-      <div class="panel-heading">Select Country</div>
-      <div class="panel-body">
-            <div class="form-group">
-                <select id="country" name="category_id" class="form-control" style="width:350px" >
-                <option value="" selected disabled>Select</option>
-                  @foreach($countries as $key => $country)
-                  <option value="{{$key}}"> {{$country}}</option>
-                  @endforeach
-                  </select>
-            </div>
-            <div class="form-group">
-                <label for="title">Select State:</label>
-                <select name="state" id="state" class="form-control" style="width:350px">
-                </select>
-            </div>
-         
-            <div class="form-group">
-                <label for="title">Select City:</label>
-                <select name="city" id="city" class="form-control" style="width:350px">
-                </select>
-            </div>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-sm-4">
+        <label for="title">Select Country:</label>
+        <select id="country" name="category_id" class="form-control form-control-sm">
+          <option value="" selected disabled>Select</option>
+          @foreach($countries as $key => $country)
+            <option value="{{$key}}"> {{$country}}</option>
+          @endforeach
+        </select>
+      </div>
+      <div class="col-sm-4">
+        <label for="title">Select State:</label>
+        <select name="state" id="state" class="form-control form-control-sm">
+        </select>
+      </div>
+      <div class="col-sm-4">
+        <label for="title">Select City:</label>
+        <select name="city" id="city" class="form-control form-control-sm">
+        </select>
       </div>
     </div>
+  </div>
 </div>
+
+
 <script type="text/javascript">
     $('#country').change(function(){
     var countryID = $(this).val();    

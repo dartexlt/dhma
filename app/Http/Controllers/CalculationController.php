@@ -82,15 +82,15 @@ class CalculationController extends Controller
         foreach ($hnr as $key => $value) {
 			$operating_load->addRow( [$hnr[$key],$Nfixed[$key]]);
         }
-        Lava::LineChart('temperature_vs_capacity', $temp_capacity, [
-        	'title' => 'Temperature vs Heat Capacity ',
-        	'hAxis' => ['title' => 'Average outdoor temperature, [°C]'],
-        	'vAxis' => ['title' => 'Heat Capacity, [MW]'], 
-        	'legend' => ['position' => 'top', 'alignment'=>'end'], 
-        	'height'=>300,
-        	'series' => [0=> ['type' => 'line','lineWidth'=>0,'pointSize'=>5], 1 => ['type' => 'line','lineWidth'=>1,'pointSize'=>0 ]]
-        ]);
-		Lava::LineChart('operating_vs_load', $operating_load, ['title' => 'Operating Hours vs Heat Load', 'hAxis' => ['title' => 'Operating hours per year, [h]'],'vAxis' => ['title' => 'Heat Load, [MW]'], 'legend' => ['position' => 'top', 'alignment'=>'end'], 'lineWidth'=>1, 'pointSize'=>5, 'height'=>300]);
+  //       Lava::LineChart('temperature_vs_capacity', $temp_capacity, [
+  //       	'title' => 'Temperature vs Heat Capacity ',
+  //       	'hAxis' => ['title' => 'Average outdoor temperature, [°C]'],
+  //       	'vAxis' => ['title' => 'Heat Capacity, [MW]'], 
+  //       	'legend' => ['position' => 'top', 'alignment'=>'end'], 
+  //       	'height'=>300,
+  //       	'series' => [0=> ['type' => 'line','lineWidth'=>0,'pointSize'=>5], 1 => ['type' => 'line','lineWidth'=>1,'pointSize'=>0 ]]
+  //       ]);
+		// Lava::LineChart('operating_vs_load', $operating_load, ['title' => 'Operating Hours vs Heat Load', 'hAxis' => ['title' => 'Operating hours per year, [h]'],'vAxis' => ['title' => 'Heat Load, [MW]'], 'legend' => ['position' => 'top', 'alignment'=>'end'], 'lineWidth'=>1, 'pointSize'=>5, 'height'=>300]);
 
 		/*$arr = array_add($request, 'Nhv'=>$Nhv);*/
         /*return redirect()->route('calc.result',compact('Q','h','t','N','Nhv'));*/
@@ -131,8 +131,9 @@ class CalculationController extends Controller
 		/*$arr = array_add($request, 'Nhv'=>$Nhv);*/
         /*return redirect()->route('calc.result',compact('Q','h','t','N','Nhv'));*/
         //return view('calc.result',compact('Q','h','t','N','Nhv','a','b','Nfixed'));
-        return view('calc.result2');
+        //return view('calc.result2');
         //return $operating_load->toJson();
+        return $operating_load->toJson();
       
     }
    
