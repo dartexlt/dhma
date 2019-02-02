@@ -9,8 +9,8 @@
 		@csrf
 		@include('forms.countrySelector')
 		<div class ="row">
-			<label for=district class="col-sm-6 col-form-label col-form-label-sm">Model name</label>
-			<input type="text" class="form-control form-control-sm" name=district placeholder="e.g. Klaipeda default model" value="" required data-parsley-value="text">
+			<label for=title class="col-sm-6 col-form-label col-form-label-sm">Model name</label>
+			<input type="text" class="form-control form-control-sm" name=title placeholder="e.g. Klaipeda default model" value="" required data-parsley-value="text">
 		</div>
 		<div class="row mt-1">
 			<div class="col-sm-2 text-right">
@@ -60,79 +60,79 @@
 					@include('forms.climate_data_input',['title' => 'h_25','value'=>'14'])
 				</div>
 				<div class="col-sm-6">
-					<div class ="row">
+					<div class ="row  mt-1">
 						<div class="col-sm-8">
-							<label for=Nave class="col-sm-12 col-form-label col-form-label-sm">Heating capacity at average outdoor temperature</label>
+							<label for=Nave class="col-sm-12 col-form-label col-form-label-sm">Heating capacity at average outdoor temperature [MW]</label>
 						</div>
 						<div class="col-sm-4">
 							<input type="number" step="0.0001" class="form-control form-control-sm" name=Nave placeholder="" value=1.13  data-parsley-type="number">
 						</div>				
 					</div>
-					<div class ="row">
+					<div class ="row mt-1">
 						<div class="col-sm-8">
-							<label for=N2hv class="col-sm-12 col-form-label col-form-label-sm">Hot water capacity at average outdoor temperature</label>
+							<label for=N2hv class="col-sm-12 col-form-label col-form-label-sm">Hot water capacity at average outdoor temperature [MW]</label>
 						</div>
 						<div class="col-sm-4">
 							<input type="number" step="0.0001" class="form-control form-control-sm" name=N2hw placeholder="" value=0.12  data-parsley-type="number">
 						</div>				
 					</div>		
-					<div class ="row">
+					<div class ="row mt-1">
 						<div class="col-sm-8">
-							<label for=Nl class="col-sm-12 col-form-label col-form-label-sm">Heat losses capacity at average outdoor temperature</label>
+							<label for=Nl class="col-sm-12 col-form-label col-form-label-sm">Heat losses capacity at average outdoor temperature [MW]</label>
 						</div>
 						<div class="col-sm-4">
 							<input type="number" step="0.0001" class="form-control form-control-sm" name=Nl placeholder="" value=0.17  data-parsley-type="number">
 						</div>				
 					</div>
-					<div class ="row">
+					<div class ="row mt-1">
 						<div class="col-sm-8">
-							<label for=tao class="col-sm-12 col-form-label col-form-label-sm">Average outdoor temperature</label>
+							<label for=tao class="col-sm-12 col-form-label col-form-label-sm">Average outdoor temperature  [°C]</label>
 						</div>
 						<div class="col-sm-4">
 							<input type="number" step="0.0001" class="form-control form-control-sm" name=tao placeholder="" value=0  data-parsley-type="number">
 						</div>				
 					</div>
-					<div class ="row">
+					<div class ="row mt-1">
 						<div class="col-sm-8">
-							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Average room temperature</label>
+							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Average room temperature  [°C]</label>
 						</div>
 						<div class="col-sm-4">
 							<input type="number" step="0.0001" class="form-control form-control-sm" name=tar placeholder="" value=18  data-parsley-type="number">
 						</div>																	
 					</div>
-					<div class ="row">
+					<div class ="row mt-1">
 						<div class="col-sm-8">
-							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Specific fuel consumption</label>
+							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Specific fuel consumption [MWh/MWh]</label>
 						</div>
 						<div class="col-sm-4">
 							<input type="number" step="0.0001" class="form-control form-control-sm" name=x1 placeholder="" value="" data-parsley-type="number">
 						</div>																	
 					</div>
-					<div class ="row">
+					<div class ="row mt-1">
 						<div class="col-sm-8">
-							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Power to heat ratio</label>
+							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Power to heat ratio [MWh/MWh]</label>
 						</div>
 						<div class="col-sm-4">
 							<input type="number" step="0.0001" class="form-control form-control-sm" name=x2 placeholder="" value="" equired data-parsley-type="number">
 						</div>																	
 					</div>
-					<div class ="row">
+					<div class ="row mt-1">
 						<div class="col-sm-8">
-							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Specific heat consumption per m2</label>
+							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Specific heat consumption per m2 [kWh/m2]</label>
 						</div>
 						<div class="col-sm-4">
 							<input type="number" step="0.0001" class="form-control form-control-sm" name=x3 placeholder="" value="" equired data-parsley-type="number">
 						</div>																	
 					</div>
-					<div class ="row">
+					<div class ="row mt-1">
 						<div class="col-sm-8">
-							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">RES share</label>
+							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">RES share [%]</label>
 						</div>
 						<div class="col-sm-4">
 							<input type="number" step="0.0001" class="form-control form-control-sm" name=x4 placeholder="" value="" equired data-parsley-type="number">
 						</div>																	
 					</div>
-					<div class ="row">
+					<div class ="row mt-1">
 						<div class="col-sm-8">
 							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Legal regulation of Low-temperature DH</label>
 						</div>
@@ -140,33 +140,33 @@
 							<input type="number" step="0.0001" class="form-control form-control-sm" name=x5 placeholder="" value="" equired data-parsley-type="number">
 						</div>																	
 					</div>
-					<div class ="row">
+					<div class ="row mt-1">
 						<div class="col-sm-8">
-							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Specific heat losses in network</label>
+							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Specific heat losses in network [kWh/MWh]</label>
 						</div>
 						<div class="col-sm-4">
 							<input type="number" step="0.0001" class="form-control form-control-sm" name=x6 placeholder="" value="" equired data-parsley-type="number">
 						</div>																	
 					</div>
-					<div class ="row">
+					<div class ="row mt-1">
 						<div class="col-sm-8">
-							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Specific CO2 emissions</label>
+							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Specific CO2 emissions [t CO2(fuel)/MWh(con.)]</label>
 						</div>
 						<div class="col-sm-4">
 							<input type="number" step="0.0001" class="form-control form-control-sm" name=x7 placeholder="" value="" equired data-parsley-type="number">
 						</div>																	
 					</div>
-					<div class ="row">
+					<div class ="row mt-1">
 						<div class="col-sm-8">
-							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Specific power consumption</label>
+							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Specific power consumption [kWh/MWh]</label>
 						</div>
 						<div class="col-sm-4">
 							<input type="number" step="0.0001" class="form-control form-control-sm" name=x8 placeholder="" value="" equired data-parsley-type="number">
 						</div>																	
 					</div>
-					<div class ="row">
+					<div class ="row mt-1">
 						<div class="col-sm-8">
-							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Affordability</label>
+							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Affordability [%]</label>
 						</div>
 						<div class="col-sm-4">
 							<input type="number" step="0.0001" class="form-control form-control-sm" name=x9 placeholder="" value="" equired data-parsley-type="number">

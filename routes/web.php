@@ -22,8 +22,11 @@ Route::post('calc', 'CalculationController@calculate')->name('calc.compute');
 Route::post('calc2', 'CalculationController@calculate2')->name('calc.compute2');
 Route::post('calc3', 'CalculationController@calculate3')->name('calc.compute3');
 Route::post('calcMA', 'CalculationController@calculateMA')->name('calc.computeMA');
-Route::post('model', 'CalculationController@model')->name('calc.model');
+Route::post('model', 'CalculationController@modelSaveDB')->name('calc.modelSaveDB');
 Route::get('result/{data_array}', 'CalculationController@getResult')->name('calc.result');
+
+Route::get('search','DataController@search');
+
 
 Route::post('/Amet1', 'CalculationController@calculate');
 Route::post('/Amet2', 'CalculationController@calculate2');

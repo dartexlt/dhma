@@ -19,7 +19,7 @@
               <a class="dropdown-item" href="/ma3">3 Method</a>
               <a class="dropdown-item" href="/model">District Model</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/ma">Multicriteria analysis</a>
+              <a class="dropdown-item" href="data">Multicriteria analysis</a>
             </div>
         </li>
         <li class="nav-item">

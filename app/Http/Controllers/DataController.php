@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Month;
 use App\HeatModel;
 use Session;
+use DB;
 
 class DataController extends Controller
 {
@@ -16,7 +17,8 @@ class DataController extends Controller
      */
     public function index()
     {
-        //
+        $countries = DB::table("countries")->pluck("name","id");
+        return view('search',compact('countries'));
     }
 
     /**
@@ -141,4 +143,25 @@ class DataController extends Controller
     {
         //
     }
+    public function search(Request $request)
+    {
+        if($request->ajax()){
+            $output="";
+            if(($request->has('city'))&&($request->city!="Select")){
+                $mod=DB::table("heat_models")->where("country_id",$request->country)->where("state_id",$request->state)->where("city_id",$request->city)->get(); 
+            }
+            else{  
+                if(($request->has('state'))&&($request->state!="Select")){
+                    $mod=DB::table("heat_models")->where("country_id",$request->country)->where("state_id",$request->state)->get();
+                }  
+                else{
+                    $mod=DB::table("heat_models")->where("country_id",$request->country)->get();
+                }
+            }
+        return response()->json($mod);
+        
+    } 
+}
+ 
+
 }

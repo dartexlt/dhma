@@ -3,8 +3,8 @@
     <div class="row">
       <div class="col-sm-4">
         <label for="title">Select Country:</label>
-        <select id="country" name="category_id" class="form-control form-control-sm">
-          <option value="" selected disabled>Select</option>
+        <select id="country" name="country" class="form-control form-control-sm">
+          <option value="" selected disabled  required data-parsley-value="text">Select</option>
           @foreach($countries as $key => $country)
             <option value="{{$key}}"> {{$country}}</option>
           @endforeach
@@ -12,12 +12,12 @@
       </div>
       <div class="col-sm-4">
         <label for="title">Select State:</label>
-        <select name="state" id="state" class="form-control form-control-sm">
+        <select name="state" id="state" class="form-control form-control-sm" required data-parsley-value="text">
         </select>
       </div>
       <div class="col-sm-4">
         <label for="title">Select City:</label>
-        <select name="city" id="city" class="form-control form-control-sm">
+        <select name="city" id="city" class="form-control form-control-sm" required data-parsley-value="text">
         </select>
       </div>
     </div>
@@ -60,6 +60,7 @@
            success:function(res){               
             if(res){
                 $("#city").empty();
+                $("#city").append('<option>Select</option>');
                 $.each(res,function(key,value){
                     $("#city").append('<option value="'+key+'">'+value+'</option>');
                 });

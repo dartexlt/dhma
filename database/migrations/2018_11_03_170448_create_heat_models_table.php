@@ -15,7 +15,13 @@ class CreateHeatModelsTable extends Migration
     {
         Schema::create('heat_models', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('district')->nullable();
+            $table->unsignedInteger('country_id');
+            $table->foreign('country_id')->references('id')->on('countries');
+             $table->unsignedInteger('state_id');
+            $table->foreign('state_id')->references('id')->on('states');
+            $table->unsignedInteger('city_id');
+            $table->foreign('city_id')->references('id')->on('cities');
+            $table->text('title');
             $table->float('nhv')->nullable();
             $table->float('a')->nullable();
             $table->float('b')->nullable();
