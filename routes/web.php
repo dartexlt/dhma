@@ -26,6 +26,7 @@ Route::post('model', 'CalculationController@modelSaveDB')->name('calc.modelSaveD
 Route::get('result/{data_array}', 'CalculationController@getResult')->name('calc.result');
 
 Route::get('search','DataController@search');
+Route::get('getAnalysisData', 'DataController@getCharts');
 
 
 Route::post('/Amet1', 'CalculationController@calculate');

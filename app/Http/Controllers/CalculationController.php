@@ -188,7 +188,7 @@ public function calculateMA(Request $request)
             array(1.057,0.60,55.00,100.00,1.00,122.90,0.00,20.21,10)
         );
         $w=array(1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9);
-        $m=array(1,0,1,0,0,1,1,1,1);
+        $m=array(1,0,1,0,0,1,1,1,1); //minimisation or maximisation
         $temp=$this->topsis($data,$w,$m);
         asort($temp);
 
@@ -204,7 +204,7 @@ public function calculateMA(Request $request)
     }
 
 
-public function topsis($matrix, $criteriaWeights,$maximisation)
+    public function topsis($matrix, $criteriaWeights,$maximisation)
     {
         $row=count($matrix);
         $col = count($matrix[0]);
@@ -672,8 +672,21 @@ public function modelSaveDB(Request $request)
             $hm->h_20=$request->h_20;
             $hm->h_25=$request->h_25;
             $hm->save();
-            Session::flash('success','Data successfully saved');
-            
+            Session::flash('success','Data successfully saved');  
+        }
+        $validator = \Validator::make($request->all(), array('title'=>'required', 'x1'=>'required|numeric','x2'=>'required|numeric','x3'=>'required|numeric','x4'=>'required|numeric','x5'=>'required|numeric','x6'=>'required|numeric','x7'=>'required|numeric','x8'=>'required|numeric','x9'=>'required|numeric'));
+        if ($validator->passes()){
+            $hm->x1=$request->x1;
+            $hm->x2=$request->x2;
+            $hm->x3=$request->x3;
+            $hm->x4=$request->x4;
+            $hm->x5=$request->x5;
+            $hm->x6=$request->x6;
+            $hm->x7=$request->x7;
+            $hm->x8=$request->x8;
+            $hm->x9=$request->x9;
+            $hm->save();
+            Session::flash('success','Data successfully saved');  
         }
         return view('calc.result2');
     }     
