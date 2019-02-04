@@ -175,7 +175,7 @@
 				</div>
 			</div>
 			<div class="row" >
-	           <button type="submit" class="btn btn-primary btn-md">Submit</button>
+	           <button type="submit" class="btn btn-primary btn-md">Save to Database</button>
 			</div>
 		</form>
 

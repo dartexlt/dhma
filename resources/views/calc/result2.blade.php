@@ -22,6 +22,6 @@
 		</div>
 	</div>
 
-	@linechart('operating_vs_load', 'f2')
+	{{-- @linechart('operating_vs_load', 'f2') --}}
 
 @endsection

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Lava;
+use Khill\Lavacharts\Lavacharts;
 use App\Month;
 use App\HeatModel;
 use Session;
 use DB;
-use Lava;
+
 
 class DataController extends Controller
 {
@@ -157,14 +159,14 @@ class DataController extends Controller
         if($request->ajax()){
             $output="";
             if(($request->has('city'))&&($request->city!="Select")){
-                $mod=DB::table("heat_models")->where("country_id",$request->country)->where("state_id",$request->state)->where("city_id",$request->city)->get(); 
+                $mod=HeatModel::with(['countries','states','cities'])->where("country_id",$request->country)->where("state_id",$request->state)->where("city_id",$request->city)->get(); 
             }
             else{  
                 if(($request->has('state'))&&($request->state!="Select")){
-                    $mod=DB::table("heat_models")->where("country_id",$request->country)->where("state_id",$request->state)->get();
+                    $mod=HeatModel::with(['countries','states','cities'])->where("country_id",$request->country)->where("state_id",$request->state)->get();
                 }  
                 else{
-                    $mod=DB::table("heat_models")->where("country_id",$request->country)->get();
+                    $mod=HeatModel::with(['countries','states','cities'])->where("country_id",$request->country)->get();
                 }
             }
             return response()->json($mod);
@@ -173,7 +175,7 @@ class DataController extends Controller
     } 
     public function getCharts(Request $request)
     {
-        if($request->ajax()){
+        //if($request->ajax()){
             $mod=DB::table("heat_models")->whereIn("id",$request->ids)->get(); 
             $operating_load = Lava::DataTable();
             $operating_load->addNumberColumn('Operating Hours [h]');
@@ -215,7 +217,7 @@ class DataController extends Controller
            $operating_load->addRow($d8);
            $operating_load->addRow($d9);
            $operating_load->addRow($d10);
-        }
+       // }
         $w=array(1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9);
         $m=array(1,0,1,0,0,1,1,1,1); //minimisation or maximisation
         $temp=app('App\Http\Controllers\CalculationController')->topsis($data,$w,$m);
@@ -229,4 +231,5 @@ class DataController extends Controller
         return array('data1' => $operating_load->toJson(),'data2' => $bar->toJson());
     
     }
+
 }

@@ -15,7 +15,8 @@
 			<table id="table1" class="table table-bordered table-hover">
 				<thead>
 					<tr>
-				 		<th>ID</th>
+						<th></th>
+				 		<th>Country/State/City</th>
 				 		<th>Model Name</th>
 					</tr>
 				</thead>
@@ -57,8 +58,9 @@
 					data.forEach(function(object) {
 						ids.push(object.id);
 						console.log(ids);						
-						$('tbody').append("<tr><td>"+object.id+"</td><td>"+object.title+"</td></tr>");
-					}); 
+						$('tbody').append("<tr><td><input type=\"checkbox\" value="+object.id+" id=checkModel checked></td><td>"+object.countries.name+"/"+object.states.name+"/"+object.cities.name+"</td><td>"+object.title+"</td></tr>");
+
+					});	
 				}
 	 		});
 		} 
@@ -76,7 +78,7 @@
 					data.forEach(function(object) {
 						ids.push(object.id);
 						console.log(ids);						
-						$('tbody').append("<tr><td>"+object.id+"</td><td>"+object.title+"</td></tr>");
+						$('tbody').append("<tr><td></td><td>"+object.countries.name+"/"+object.states.name+"/"+object.cities.name+"</td><td>"+object.title+"</td></tr>");
 					});
 	 			}
 	 		});
@@ -95,7 +97,7 @@
 					data.forEach(function(object) {
 						ids.push(object.id);
 						console.log(ids);
-						$('tbody').append("<tr><td>"+object.id+"</td><td>"+object.title+"</td></tr>");
+						$('tbody').append("<tr><td></td><td>"+object.countries.name+"/"+object.states.name+"/"+object.cities.name+"</td><td>"+object.title+"</td></tr>");
 					});		
 	 			}
 	 		});
@@ -103,6 +105,10 @@
 	}); 
 	$(document).ready(function() {
     	$('#b3').click(function(){
+    		$('#checkModel').each(function(i,obj){
+    			console.log(i);	
+    		});
+    		
     	 	$.ajax({
     	 		type: "GET",
     	 		url: "getAnalysisData",
@@ -111,7 +117,7 @@
 	  			  	console.log(dataTableJson);
 	               	lava.loadData('operating_vs_load', dataTableJson.data1, function (chart) {
 	           			console.log('chart 1 loadData callback');
-	 					console.log(chart);
+	 					console.log(chart);	
 	 		 		});
 	 		 		lava.loadData('multicriteria', dataTableJson.data2, function (chart) {
 	           			console.log('chart 1 loadData callback');

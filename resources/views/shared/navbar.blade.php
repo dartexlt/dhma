@@ -23,10 +23,10 @@
             </div>
         </li>
         <li class="nav-item">
-        <a class="nav-link contacts" href="/data/create">Map</a>
+        <a class="nav-link contacts" href="/">Map</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link contacts" href="/data/create">About</a>
+        <a class="nav-link contacts" href="/ma">About</a>
         </li>
 </ul>
 <form class="form-inline my-2 my-lg-0">
