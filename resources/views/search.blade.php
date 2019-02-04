@@ -44,7 +44,6 @@
 	</div>
 </div>
 <script type="text/javascript">
-	var ids=[];
 	$('#country').change(function(){
     var countryID = $(this).val();    
 	    if(countryID){
@@ -54,12 +53,8 @@
 				data:{"country":countryID},
 	 			success:function(data){
 	 				$('tbody').empty();
-	 				ids=[];
-					data.forEach(function(object) {
-						ids.push(object.id);
-						console.log(ids);						
+	 				data.forEach(function(object) {
 						$('tbody').append("<tr><td><input type=\"checkbox\" value="+object.id+" id=checkModel checked></td><td>"+object.countries.name+"/"+object.states.name+"/"+object.cities.name+"</td><td>"+object.title+"</td></tr>");
-
 					});	
 				}
 	 		});
@@ -74,11 +69,9 @@
 				data:{"country":$('#country').val(), "state":stateID},
 	 			success:function(data){
 					$('tbody').empty();
-					ids=[];
 					data.forEach(function(object) {
-						ids.push(object.id);
-						console.log(ids);						
-						$('tbody').append("<tr><td></td><td>"+object.countries.name+"/"+object.states.name+"/"+object.cities.name+"</td><td>"+object.title+"</td></tr>");
+						$('tbody').append("<tr><td><input type=\"checkbox\" value="+object.id+" id=checkModel checked></td><td>"+object.countries.name+"/"+object.states.name+"/"+object.cities.name+"</td><td>"+object.title+"</td></tr>");
+
 					});
 	 			}
 	 		});
@@ -93,11 +86,9 @@
 				data:{"country":$('#country').val(),"state":$('#state').val(), "city":cityID},
 	 			success:function(data){
 	 				$('tbody').empty();
-	 				ids=[];
-					data.forEach(function(object) {
-						ids.push(object.id);
-						console.log(ids);
-						$('tbody').append("<tr><td></td><td>"+object.countries.name+"/"+object.states.name+"/"+object.cities.name+"</td><td>"+object.title+"</td></tr>");
+	 				data.forEach(function(object) {
+						$('tbody').append("<tr><td><input type=\"checkbox\" value="+object.id+" id=checkModel checked></td><td>"+object.countries.name+"/"+object.states.name+"/"+object.cities.name+"</td><td>"+object.title+"</td></tr>");
+
 					});		
 	 			}
 	 		});
@@ -105,14 +96,19 @@
 	}); 
 	$(document).ready(function() {
     	$('#b3').click(function(){
-    		$('#checkModel').each(function(i,obj){
-    			console.log(i);	
-    		});
-    		
+    		// $('#checkModel').each(function(i,obj){
+    		// 	console.log(i);	
+    		// });
+    		var selected = [];
+			$('#table1 input:checked').each(function() {
+   				 selected.push($(this).attr('value'));
+			});
+			console.log(selected);	
+
     	 	$.ajax({
     	 		type: "GET",
     	 		url: "getAnalysisData",
-    			data: {"ids":ids},
+    			data: {"ids":selected},
     	 		success: function (dataTableJson) {
 	  			  	console.log(dataTableJson);
 	               	lava.loadData('operating_vs_load', dataTableJson.data1, function (chart) {
