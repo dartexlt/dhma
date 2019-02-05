@@ -250,8 +250,16 @@ public function calculateMA(Request $request)
                 $sminus[$r]=sqrt($sminus[$r]);
             }
             $C=array();
-            for ($r = 0; $r < $row; $r++) {
-                $C[$r]=$sminus[$r]/($sminus[$r]+$splus[$r]);
+      
+            for ($r = 0; $r < $row; $r++) {    
+                $division=0;
+                if (($sminus[$r]+$splus[$r])==0){
+                    $division=1;
+                }
+                else{
+                    $division=$sminus[$r]+$splus[$r];
+                }
+                $C[$r]=$sminus[$r]/$division;
             }
             return $C;
         }

@@ -158,15 +158,20 @@ class DataController extends Controller
     {
         if($request->ajax()){
             $output="";
-            if(($request->has('city'))&&($request->city!="Select")){
-                $mod=HeatModel::with(['countries','states','cities'])->where("country_id",$request->country)->where("state_id",$request->state)->where("city_id",$request->city)->get(); 
+            if($request->has('all')){
+                $mod=HeatModel::with(['countries','states','cities'])->get(); 
             }
-            else{  
-                if(($request->has('state'))&&($request->state!="Select")){
-                    $mod=HeatModel::with(['countries','states','cities'])->where("country_id",$request->country)->where("state_id",$request->state)->get();
-                }  
-                else{
-                    $mod=HeatModel::with(['countries','states','cities'])->where("country_id",$request->country)->get();
+            else{
+                if(($request->has('city'))&&($request->city!="Select")){
+                    $mod=HeatModel::with(['countries','states','cities'])->where("country_id",$request->country)->where("state_id",$request->state)->where("city_id",$request->city)->get(); 
+                }
+                else{  
+                    if(($request->has('state'))&&($request->state!="Select")){
+                        $mod=HeatModel::with(['countries','states','cities'])->where("country_id",$request->country)->where("state_id",$request->state)->get();
+                    }  
+                    else{
+                        $mod=HeatModel::with(['countries','states','cities'])->where("country_id",$request->country)->get();
+                    }
                 }
             }
             return response()->json($mod);

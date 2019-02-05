@@ -44,6 +44,23 @@
 	</div>
 </div>
 <script type="text/javascript">
+	$( window ).on( "load", function() {
+	$.ajax({
+    		type : "GET",
+			url : "{{URL::to('search')}}",
+			data:{"all":0},
+ 			success:function(data){
+ 				$('tbody').empty();
+ 				data.forEach(function(object) {
+					$('tbody').append("<tr><td><input type=\"checkbox\" value="+object.id+" id=checkModel checked></td><td>"+object.countries.name+"/"+object.states.name+"/"+object.cities.name+"</td><td>"+object.title+"</td></tr>");
+				});	
+			}
+ 		});
+
+
+
+
+	});
 	$('#country').change(function(){
     var countryID = $(this).val();    
 	    if(countryID){
