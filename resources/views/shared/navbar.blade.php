@@ -23,7 +23,7 @@
             </div>
         </li>
         <li class="nav-item">
-        <a class="nav-link contacts" href="/">Map</a>
+        <a class="nav-link contacts" href="/crud">Map</a>
         </li>
         <li class="nav-item">
         <a class="nav-link contacts" href="/ma">About</a>

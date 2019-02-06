@@ -17,6 +17,7 @@ Route::get('/ma2', 'PagesController@getMA2');
 Route::get('/ma3', 'PagesController@getMA3');
 Route::get('/ma', 'PagesController@getMA');
 Route::get('/model', 'PagesController@getModel');
+Route::get('/crud', 'PagesController@getCrud');
 Route::resource('data', 'DataController');
 Route::post('calc', 'CalculationController@calculate')->name('calc.compute');
 Route::post('calc2', 'CalculationController@calculate2')->name('calc.compute2');

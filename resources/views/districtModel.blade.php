@@ -42,24 +42,24 @@
 			@include('forms.inputform',['month' => 'November', 'Qval'=>'755.45', 'hval'=>'720.00', 'tval'=>'4.70', 'c'=>'checked'])
 			@include('forms.inputform',['month' => 'December', 'Qval'=>'989.79', 'hval'=>'744.00', 'tval'=>'2.11', 'c'=>'checked'])
 			<div class="row mt-2">			
-				<div class="col-sm-6">
+				<div class="col-sm-5">
 					<div class="row mt-2">
 						<div class="col-sm-12 text-center">
-							<label>Operating hours for apropriate temperatures</label>
+							<label>Total Operating Hours in a Year at Apropriate Outdor Temperatures:</label>
 						</div>
 					</div>
-					@include('forms.climate_data_input',['title' => 'h83','value'=>'8760'])
-					@include('forms.climate_data_input',['title' => 'h82','value'=>'4872'])
-					@include('forms.climate_data_input',['title' => 'h8','value'=>'4872'])
-					@include('forms.climate_data_input',['title' => 'h5','value'=>'3989'])
-					@include('forms.climate_data_input',['title' => 'h0','value'=>'2835'])
-					@include('forms.climate_data_input',['title' => 'h_5','value'=>'1050'])
-					@include('forms.climate_data_input',['title' => 'h_10','value'=>'518'])
-					@include('forms.climate_data_input',['title' => 'h_15','value'=>'305'])
-					@include('forms.climate_data_input',['title' => 'h_20','value'=>'104'])
-					@include('forms.climate_data_input',['title' => 'h_25','value'=>'14'])
+					@include('forms.climate_data_input',['title' => 'h83','label' => 'Total Hours in a Year [h]','value'=>'8760'])
+					@include('forms.climate_data_input',['title' => 'h82','label' => 'Total Hours in a Heating Season [h]','value'=>'4872'])
+					@include('forms.climate_data_input',['title' => 'h8','label' => 'Total Operating Hours at <8°C [h]','value'=>'4872'])
+					@include('forms.climate_data_input',['title' => 'h5','label' => 'Total Operating Hours at <5°C [h]','value'=>'3989'])
+					@include('forms.climate_data_input',['title' => 'h0','label' => 'Total Operating Hours at <0°C [h]','value'=>'2835'])
+					@include('forms.climate_data_input',['title' => 'h_5','label' => 'Total Operating Hours at <-5°C [h]','value'=>'1050'])
+					@include('forms.climate_data_input',['title' => 'h_10','label' => 'Total Operating Hours at <-10°C [h]','value'=>'518'])
+					@include('forms.climate_data_input',['title' => 'h_15','label' => 'Total Operating Hours at <-15°C [h]','value'=>'305'])
+					@include('forms.climate_data_input',['title' => 'h_20','label' => 'Total Operating Hours at <-20°C [h]','value'=>'104'])
+					@include('forms.climate_data_input',['title' => 'h_25','label' => 'Total Operating Hours at <-25°C [h]','value'=>'14'])
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-7">
 					<div class ="row  mt-1">
 						<div class="col-sm-8">
 							<label for=Nave class="col-sm-12 col-form-label col-form-label-sm">Heating capacity at average outdoor temperature [MW]</label>

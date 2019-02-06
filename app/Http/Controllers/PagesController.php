@@ -50,4 +50,7 @@ class PagesController extends Controller
     public function getIndex(){
     	return view('welcome');
     }
+    public function getCrud(){
+        return view('crud');
+    }
 }
