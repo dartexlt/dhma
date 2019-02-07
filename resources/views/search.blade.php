@@ -113,31 +113,32 @@
 	}); 
 	$(document).ready(function() {
     	$('#b3').click(function(){
-    		// $('#checkModel').each(function(i,obj){
-    		// 	console.log(i);	
-    		// });
     		var selected = [];
 			$('#table1 input:checked').each(function() {
    				 selected.push($(this).attr('value'));
 			});
 			console.log(selected);	
-
-    	 	$.ajax({
-    	 		type: "GET",
-    	 		url: "getAnalysisData",
-    			data: {"ids":selected},
-    	 		success: function (dataTableJson) {
-	  			  	console.log(dataTableJson);
-	               	lava.loadData('operating_vs_load', dataTableJson.data1, function (chart) {
-	           			console.log('chart 1 loadData callback');
-	 					console.log(chart);	
-	 		 		});
-	 		 		lava.loadData('multicriteria', dataTableJson.data2, function (chart) {
-	           			console.log('chart 1 loadData callback');
-	 					console.log(chart);
-	 		 		});
-  			  	}
-  			 });
+			if (selected.length<2){
+				alert("At least 2 models should be selected");
+			}
+			else{			
+	    	 	$.ajax({
+	    	 		type: "GET",
+	    	 		url: "getAnalysisData",
+	    			data: {"ids":selected},
+	    	 		success: function (dataTableJson) {
+		  			  	console.log(dataTableJson);
+		               	lava.loadData('operating_vs_load', dataTableJson.data1, function (chart) {
+		           			console.log('chart 1 loadData callback');
+		 					console.log(chart);	
+		 		 		});
+		 		 		lava.loadData('multicriteria', dataTableJson.data2, function (chart) {
+		           			console.log('chart 1 loadData callback');
+		 					console.log(chart);
+		 		 		});
+	  			  	}
+	  			 });
+	    	 }
   		});
     });
 

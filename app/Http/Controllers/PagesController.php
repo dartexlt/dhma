@@ -51,6 +51,7 @@ class PagesController extends Controller
     	return view('welcome');
     }
     public function getCrud(){
-        return view('crud');
+        $countries = DB::table("countries")->pluck("name","id");
+        return view('crud',compact('countries'));
     }
 }
