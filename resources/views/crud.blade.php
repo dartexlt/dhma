@@ -504,22 +504,41 @@
 			url : "{{URL::to('search')}}",
 			data:{"all":0},
  			success:function(data){
- 				
+ 				datajson=data;
  				$('tbody').empty();
+ 				var i=0;
  				data.forEach(function(object) {
 					$('tbody').append("<tr><td>"+object.countries.name+"/"+object.states.name+"/"+object.cities.name+"</td><td>"+object.title+"</td><td>\
-                        <a href=\"#editModel\" class=\"edit\" data-toggle=\"modal\" value="+object.id+"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Edit\">&#xE254;</i></a>\
+                        <a href=\"#editModel\" class=\"edit\" data-toggle=\"modal\" value="+i+"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Edit\">&#xE254;</i></a>\
                         <a href=\"#deleteModel\" class=\"delete\" data-toggle=\"modal\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Delete\">&#xE872;</i></a></td></tr>");
-				datajson=object;
+					i++;
 				});
 					
 			}
  		});
 
 	});
-	$('[title="Edit"]').click(function() {
-		$("input[name='title']" ).val("aaaaaaaaaaaaaaaaaaaa");
-		console.log("datajson");
+	$(document).on("click",".edit",function() {
+		console.log(datajson);
+		var i=$(this).attr('value');
+		$("input[name='title']" ).val(datajson[i].title);
+		var tm=$.grep(datajson[i].months, function (h) {return h.parameter_id == 1});
+		$("input[name='QJanuary']" ).val(tm[0].january);
+		$("input[name='QFebruary']" ).val(tm[0].february);
+		$("input[name='QMarch']" ).val(tm[0].march);
+		$("input[name='QApril']" ).val(tm[0].april);
+		$("input[name='QMay']" ).val(tm[0].may);
+		$("input[name='QJune']" ).val(tm[0].june);
+		$("input[name='QJuly']" ).val(tm[0].july);
+		$("input[name='QAugust']" ).val(tm[0].august);
+		$("input[name='QSeptember']" ).val(tm[0].september);
+		$("input[name='QOctober']" ).val(tm[0].october);
+		$("input[name='QNovember']" ).val(tm[0].november);
+		$("input[name='QDecember']" ).val(tm[0].december);
+		
+
+
+		
 	});
 
 	$('#country').change(function(){

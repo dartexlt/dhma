@@ -104,6 +104,22 @@ class DataController extends Controller
         $month->december=$request->tDecember;
         $month->parameter_id=3;
         $month->save();
+        $month = new Month;
+        $month->heat_model_id=$hm->id;
+        $month->january=$request->January;
+        $month->february=$request->February;
+        $month->march=$request->March;
+        $month->april=$request->April;
+        $month->may=$request->May;
+        $month->june=$request->June;
+        $month->july=$request->July;
+        $month->august=$request->August;
+        $month->september=$request->September;
+        $month->october=$request->October;
+        $month->november=$request->November;
+        $month->december=$request->December;
+        $month->parameter_id=10;
+        $month->save();
         Session::flash('success','Data successfully saved');
         //return view('MA');
         return redirect()->route('data.show',$hm->id);
@@ -159,18 +175,18 @@ class DataController extends Controller
         if($request->ajax()){
             $output="";
             if($request->has('all')){
-                $mod=HeatModel::with(['countries','states','cities'])->get(); 
+                $mod=HeatModel::with(['countries','states','cities','months'])->get(); 
             }
             else{
                 if(($request->has('city'))&&($request->city!="Select")){
-                    $mod=HeatModel::with(['countries','states','cities'])->where("country_id",$request->country)->where("state_id",$request->state)->where("city_id",$request->city)->get(); 
+                    $mod=HeatModel::with(['countries','states','cities','months'])->where("country_id",$request->country)->where("state_id",$request->state)->where("city_id",$request->city)->get(); 
                 }
                 else{  
                     if(($request->has('state'))&&($request->state!="Select")){
-                        $mod=HeatModel::with(['countries','states','cities'])->where("country_id",$request->country)->where("state_id",$request->state)->get();
+                        $mod=HeatModel::with(['countries','states','cities','months'])->where("country_id",$request->country)->where("state_id",$request->state)->get();
                     }  
                     else{
-                        $mod=HeatModel::with(['countries','states','cities'])->where("country_id",$request->country)->get();
+                        $mod=HeatModel::with(['countries','states','cities','months'])->where("country_id",$request->country)->get();
                     }
                 }
             }

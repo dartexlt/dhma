@@ -436,7 +436,23 @@ public function model(Request $request)
             $month->december=$request->tDecember;
             $month->parameter_id=4; //Average outdoor temperature
             $month->save();
-            Session::flash('success','Data successfully saved');
+            $month = new Month;
+            $month->heat_model_id=$hm->id;
+            $month->january=$request->January;
+            $month->february=$request->February;
+            $month->march=$request->March;
+            $month->april=$request->April;
+            $month->may=$request->May;
+            $month->june=$request->June;
+            $month->july=$request->July;
+            $month->august=$request->August;
+            $month->september=$request->September;
+            $month->october=$request->October;
+            $month->november=$request->November;
+            $month->december=$request->December;
+            $month->parameter_id=10;
+            $month->save();
+                Session::flash('success','Data successfully saved');
              return view('calc.result');
         }
         else{
@@ -638,6 +654,22 @@ public function modelSaveDB(Request $request)
             $month->november=$request->tNovember;
             $month->december=$request->tDecember;
             $month->parameter_id=4; //Average outdoor temperature
+            $month->save();
+            $month = new Month;
+            $month->heat_model_id=$hm->id;
+            $month->january=$request->January;
+            $month->february=$request->February;
+            $month->march=$request->March;
+            $month->april=$request->April;
+            $month->may=$request->May;
+            $month->june=$request->June;
+            $month->july=$request->July;
+            $month->august=$request->August;
+            $month->september=$request->September;
+            $month->october=$request->October;
+            $month->november=$request->November;
+            $month->december=$request->December;
+            $month->parameter_id=10;
             $month->save();
             Session::flash('success','Data successfully saved');
             // return view('calc.result');
