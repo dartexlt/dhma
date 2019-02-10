@@ -261,6 +261,7 @@
 				</div>
             </div>
         </div>
+        
         @csrf
 		@include('forms.countrySelector')
         <table id="table1" class="table table-striped table-hover">
@@ -292,13 +293,16 @@
 <div id="editModel" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form method="post" id="f1" action="{{url('model')}}" data-parsley-validate>
+			<form method="post" id="f1" action="" data-parsley-validate>
 				@csrf
 				<div class="modal-header">						
 					<h4 class="modal-title">Edit Model</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">
+					<div class ="row mt-2">
+						<h5 id="region" class="modal-title"><b></b>></h5>
+					</div>
 					<div class ="row">
 						<label for=title class="col-form-label col-form-label-sm">Model name</label>
 						<input type="text" class="form-control form-control-sm" name=title placeholder="e.g. Klaipeda default model" value="" required data-parsley-value="text">
@@ -320,18 +324,18 @@
 							<label>Average outdoor temperature [°C]</label>
 						</div>
 					</div>
-					@include('forms.inputform',['month' => 'January', 'Qval'=>'1207.59', 'hval'=>'744.00', 'tval'=>'-2.01', 'c'=>'checked'])
-					@include('forms.inputform',['month' => 'February', 'Qval'=>'1325.19', 'hval'=>'672.00', 'tval'=>'-6.99', 'c'=>'checked'])
-					@include('forms.inputform',['month' => 'March', 'Qval'=>'1022.45', 'hval'=>'744.00', 'tval'=>'0.80', 'c'=>'checked'])
-					@include('forms.inputform',['month' => 'April', 'Qval'=>'459.78', 'hval'=>'720.00', 'tval'=>'7.84', 'c'=>'checked'])
-					@include('forms.inputform',['month' => 'May', 'Qval'=>'118.10', 'hval'=>'744.00', 'tval'=>'12.54', 'c'=>''])
-					@include('forms.inputform',['month' => 'June', 'Qval'=>'93.50', 'hval'=>'720.00', 'tval'=>'18.63', 'c'=>''])
-					@include('forms.inputform',['month' => 'July', 'Qval'=>'86.72', 'hval'=>'744.00', 'tval'=>'21.13', 'c'=>''])
-					@include('forms.inputform',['month' => 'August', 'Qval'=>'94.03', 'hval'=>'744.00', 'tval'=>'17.89', 'c'=>''])
-					@include('forms.inputform',['month' => 'September', 'Qval'=>'102.30', 'hval'=>'720.00', 'tval'=>'14.26', 'c'=>''])
-					@include('forms.inputform',['month' => 'October', 'Qval'=>'402.98', 'hval'=>'744.00', 'tval'=>'8.40', 'c'=>'checked'])
-					@include('forms.inputform',['month' => 'November', 'Qval'=>'755.45', 'hval'=>'720.00', 'tval'=>'4.70', 'c'=>'checked'])
-					@include('forms.inputform',['month' => 'December', 'Qval'=>'989.79', 'hval'=>'744.00', 'tval'=>'2.11', 'c'=>'checked'])
+					@include('forms.inputform',['month' => 'January', 'Qval'=>'', 'hval'=>'', 'tval'=>'', 'c'=>''])
+					@include('forms.inputform',['month' => 'February', 'Qval'=>'', 'hval'=>'', 'tval'=>'', 'c'=>''])
+					@include('forms.inputform',['month' => 'March', 'Qval'=>'', 'hval'=>'', 'tval'=>'', 'c'=>''])
+					@include('forms.inputform',['month' => 'April', 'Qval'=>'', 'hval'=>'', 'tval'=>'', 'c'=>''])
+					@include('forms.inputform',['month' => 'May', 'Qval'=>'', 'hval'=>'', 'tval'=>'', 'c'=>''])
+					@include('forms.inputform',['month' => 'June', 'Qval'=>'', 'hval'=>'', 'tval'=>'', 'c'=>''])
+					@include('forms.inputform',['month' => 'July', 'Qval'=>'', 'hval'=>'', 'tval'=>'', 'c'=>''])
+					@include('forms.inputform',['month' => 'August', 'Qval'=>'', 'hval'=>'', 'tval'=>'', 'c'=>''])
+					@include('forms.inputform',['month' => 'September', 'Qval'=>'', 'hval'=>'', 'tval'=>'', 'c'=>''])
+					@include('forms.inputform',['month' => 'October', 'Qval'=>'', 'hval'=>'', 'tval'=>'', 'c'=>''])
+					@include('forms.inputform',['month' => 'November', 'Qval'=>'', 'hval'=>'', 'tval'=>'', 'c'=>''])
+					@include('forms.inputform',['month' => 'December', 'Qval'=>'', 'hval'=>'', 'tval'=>'', 'c'=>''])
 					<div class="row mt-2">			
 						<div class="col-sm-5">
 							<div class="row mt-2">
@@ -339,16 +343,16 @@
 									<label>Total Operating Hours in a Year at Apropriate Outdor Temperatures:</label>
 								</div>
 							</div>
-							@include('forms.climate_data_input',['title' => 'h83','label' => 'Total Hours in a Year [h]','value'=>'8760'])
-							@include('forms.climate_data_input',['title' => 'h82','label' => 'Total Hours in a Heating Season [h]','value'=>'4872'])
-							@include('forms.climate_data_input',['title' => 'h8','label' => 'Total Operating Hours at <8°C [h]','value'=>'4872'])
-							@include('forms.climate_data_input',['title' => 'h5','label' => 'Total Operating Hours at <5°C [h]','value'=>'3989'])
-							@include('forms.climate_data_input',['title' => 'h0','label' => 'Total Operating Hours at <0°C [h]','value'=>'2835'])
-							@include('forms.climate_data_input',['title' => 'h_5','label' => 'Total Operating Hours at <-5°C [h]','value'=>'1050'])
-							@include('forms.climate_data_input',['title' => 'h_10','label' => 'Total Operating Hours at <-10°C [h]','value'=>'518'])
-							@include('forms.climate_data_input',['title' => 'h_15','label' => 'Total Operating Hours at <-15°C [h]','value'=>'305'])
-							@include('forms.climate_data_input',['title' => 'h_20','label' => 'Total Operating Hours at <-20°C [h]','value'=>'104'])
-							@include('forms.climate_data_input',['title' => 'h_25','label' => 'Total Operating Hours at <-25°C [h]','value'=>'14'])
+							@include('forms.climate_data_input',['title' => 'h83','label' => 'Total Hours in a Year [h]','value'=>''])
+							@include('forms.climate_data_input',['title' => 'h82','label' => 'Total Hours in a Heating Season [h]','value'=>''])
+							@include('forms.climate_data_input',['title' => 'h8','label' => 'Total Operating Hours at <8°C [h]','value'=>''])
+							@include('forms.climate_data_input',['title' => 'h5','label' => 'Total Operating Hours at <5°C [h]','value'=>''])
+							@include('forms.climate_data_input',['title' => 'h0','label' => 'Total Operating Hours at <0°C [h]','value'=>''])
+							@include('forms.climate_data_input',['title' => 'h_5','label' => 'Total Operating Hours at <-5°C [h]','value'=>''])
+							@include('forms.climate_data_input',['title' => 'h_10','label' => 'Total Operating Hours at <-10°C [h]','value'=>''])
+							@include('forms.climate_data_input',['title' => 'h_15','label' => 'Total Operating Hours at <-15°C [h]','value'=>''])
+							@include('forms.climate_data_input',['title' => 'h_20','label' => 'Total Operating Hours at <-20°C [h]','value'=>''])
+							@include('forms.climate_data_input',['title' => 'h_25','label' => 'Total Operating Hours at <-25°C [h]','value'=>''])
 						</div>
 						<div class="col-sm-7">
 							<div class ="row  mt-1">
@@ -356,7 +360,7 @@
 									<label for=Nave class="col-sm-12 col-form-label col-form-label-sm">Heating capacity at average outdoor temperature [MW]</label>
 								</div>
 								<div class="col-sm-4">
-									<input type="number" step="0.0001" class="form-control form-control-sm" name=Nave placeholder="" value=1.13  data-parsley-type="number">
+									<input type="number" step="0.0001" class="form-control form-control-sm" name=Nave placeholder="" value=""  data-parsley-type="number">
 								</div>				
 							</div>
 							<div class ="row mt-1">
@@ -364,7 +368,7 @@
 									<label for=N2hv class="col-sm-12 col-form-label col-form-label-sm">Hot water capacity at average outdoor temperature [MW]</label>
 								</div>
 								<div class="col-sm-4">
-									<input type="number" step="0.0001" class="form-control form-control-sm" name=N2hw placeholder="" value=0.12  data-parsley-type="number">
+									<input type="number" step="0.0001" class="form-control form-control-sm" name=N2hw placeholder="" value=""  data-parsley-type="number">
 								</div>				
 							</div>		
 							<div class ="row mt-1">
@@ -372,7 +376,7 @@
 									<label for=Nl class="col-sm-12 col-form-label col-form-label-sm">Heat losses capacity at average outdoor temperature [MW]</label>
 								</div>
 								<div class="col-sm-4">
-									<input type="number" step="0.0001" class="form-control form-control-sm" name=Nl placeholder="" value=0.17  data-parsley-type="number">
+									<input type="number" step="0.0001" class="form-control form-control-sm" name=Nl placeholder="" value=""  data-parsley-type="number">
 								</div>				
 							</div>
 							<div class ="row mt-1">
@@ -380,7 +384,7 @@
 									<label for=tao class="col-sm-12 col-form-label col-form-label-sm">Average outdoor temperature  [°C]</label>
 								</div>
 								<div class="col-sm-4">
-									<input type="number" step="0.0001" class="form-control form-control-sm" name=tao placeholder="" value=0  data-parsley-type="number">
+									<input type="number" step="0.0001" class="form-control form-control-sm" name=tao placeholder="" value=""  data-parsley-type="number">
 								</div>				
 							</div>
 							<div class ="row mt-1">
@@ -388,7 +392,7 @@
 									<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Average room temperature  [°C]</label>
 								</div>
 								<div class="col-sm-4">
-									<input type="number" step="0.0001" class="form-control form-control-sm" name=tar placeholder="" value=18  data-parsley-type="number">
+									<input type="number" step="0.0001" class="form-control form-control-sm" name=tar placeholder="" value=""  data-parsley-type="number">
 								</div>																	
 							</div>
 							<div class ="row mt-1">
@@ -520,9 +524,64 @@
 	});
 	$(document).on("click",".edit",function() {
 		console.log(datajson);
+		var tm=null;
 		var i=$(this).attr('value');
+		var url1="{{ route('data.update',"+datajson[i].id")}}";
+		console.log(url1);
+		$('#f1').attr('action',url1);
+		$('#region').text(datajson[i].countries.name+"/"+datajson[i].states.name+"/"+datajson[i].cities.name);
 		$("input[name='title']" ).val(datajson[i].title);
+		tm=$.grep(datajson[i].months, function (h) {return h.parameter_id == 10});
+		console.log(tm);
+		if (tm[0]!=null){
+			$('input[name="January"]').each(function(){
+							this.checked = tm[0].january;                        
+						});
+			$('input[name="February"]').each(function(){
+							this.checked = tm[0].february;                        
+						});
+			$('input[name="March"]').each(function(){
+							this.checked = tm[0].march;                        
+						});
+			$('input[name="April"]').each(function(){
+							this.checked = tm[0].april;                        
+						});
+			$('input[name="May"]').each(function(){
+							this.checked = tm[0].may;                        
+						});
+			$('input[name="June"]').each(function(){
+							this.checked = tm[0].june;                        
+						});
+			$('input[name="July"]').each(function(){
+							this.checked = tm[0].july;                        
+						});
+			$('input[name="August"]').each(function(){
+							this.checked = tm[0].august;                        
+						});
+			$('input[name="September"]').each(function(){
+							this.checked = tm[0].september;                        
+						});
+			$('input[name="October"]').each(function(){
+							this.checked = tm[0].october;                        
+						});
+			$('input[name="November"]').each(function(){
+					this.checked = tm[0].november;                        
+			});
+			$('input[name="December"]').each(function(){
+				this.checked = tm[0].december;                        
+			});
+		} 
+		else{
+			$('input[type="checkbox"]').each(function(){
+			this.checked = 0;                        
+		});
+		}
 		var tm=$.grep(datajson[i].months, function (h) {return h.parameter_id == 1});
+		
+
+		
+
+		$(":checkbox[name='January']").checked=false;
 		$("input[name='QJanuary']" ).val(tm[0].january);
 		$("input[name='QFebruary']" ).val(tm[0].february);
 		$("input[name='QMarch']" ).val(tm[0].march);
@@ -535,10 +594,60 @@
 		$("input[name='QOctober']" ).val(tm[0].october);
 		$("input[name='QNovember']" ).val(tm[0].november);
 		$("input[name='QDecember']" ).val(tm[0].december);
+		tm=$.grep(datajson[i].months, function (h) {return h.parameter_id == 2});
+		console.log(tm);
+		$("input[name='hJanuary']" ).val(tm[0].january);
+		$("input[name='hFebruary']" ).val(tm[0].february);
+		$("input[name='hMarch']" ).val(tm[0].march);
+		$("input[name='hApril']" ).val(tm[0].april);
+		$("input[name='hMay']" ).val(tm[0].may);
+		$("input[name='hJune']" ).val(tm[0].june);
+		$("input[name='hJuly']" ).val(tm[0].july);
+		$("input[name='hAugust']" ).val(tm[0].august);
+		$("input[name='hSeptember']" ).val(tm[0].september);
+		$("input[name='hOctober']" ).val(tm[0].october);
+		$("input[name='hNovember']" ).val(tm[0].november);
+		$("input[name='hDecember']" ).val(tm[0].december);
+		tm=$.grep(datajson[i].months, function (h) {return h.parameter_id == 4});
+		console.log(tm);
+		$("input[name='tJanuary']" ).val(tm[0].january);
+		$("input[name='tFebruary']" ).val(tm[0].february);
+		$("input[name='tMarch']" ).val(tm[0].march);
+		$("input[name='tApril']" ).val(tm[0].april);
+		$("input[name='tMay']" ).val(tm[0].may);
+		$("input[name='tJune']" ).val(tm[0].june);
+		$("input[name='tJuly']" ).val(tm[0].july);
+		$("input[name='tAugust']" ).val(tm[0].august);
+		$("input[name='tSeptember']" ).val(tm[0].september);
+		$("input[name='tOctober']" ).val(tm[0].october);
+		$("input[name='tNovember']" ).val(tm[0].november);
+		$("input[name='tDecember']" ).val(tm[0].december);
 		
+		$("input[name='h83']" ).val(datajson[i].h83);
+		$("input[name='h82']" ).val(datajson[i].h82);
+		$("input[name='h8']" ).val(datajson[i].h8);
+		$("input[name='h5']" ).val(datajson[i].h5);
+		$("input[name='h0']" ).val(datajson[i].h0);
+		$("input[name='h_5']" ).val(datajson[i].h_5);
+		$("input[name='h_10']" ).val(datajson[i].h_10);
+		$("input[name='h_15']" ).val(datajson[i].h_15);
+		$("input[name='h_20']" ).val(datajson[i].h_20);
+		$("input[name='h_25']" ).val(datajson[i].h_25);
 
-
-		
+		$("input[name='Nave']" ).val(datajson[i].Nave);
+		$("input[name='N2hw']" ).val(datajson[i].N2hw);
+		$("input[name='Nl']" ).val(datajson[i].Nl);
+		$("input[name='tao']" ).val(datajson[i].tao);
+		$("input[name='tar']" ).val(datajson[i].tar);
+		$("input[name='x1']" ).val(datajson[i].x1);
+		$("input[name='x2']" ).val(datajson[i].x2);
+		$("input[name='x3']" ).val(datajson[i].x3);
+		$("input[name='x4']" ).val(datajson[i].x4);
+		$("input[name='x5']" ).val(datajson[i].x5);
+		$("input[name='x6']" ).val(datajson[i].x6);
+		$("input[name='x7']" ).val(datajson[i].x7);
+		$("input[name='x8']" ).val(datajson[i].x8);
+		$("input[name='x9']" ).val(datajson[i].x9);
 	});
 
 	$('#country').change(function(){
