@@ -293,7 +293,8 @@
 <div id="editModel" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form method="post" id="f1" action="" data-parsley-validate>
+			<form method="post" id="f2" action="{{URL::to('data')}}" data-parsley-validate>
+				<input name="_method" type="hidden" value="PUT">
 				@csrf
 				<div class="modal-header">						
 					<h4 class="modal-title">Edit Model</h4>
@@ -502,6 +503,7 @@
 
 <script type="text/javascript">
 	var datajson=null;
+	var url=null;
 	$(window).on( "load", function() {
 		$.ajax({
     		type : "GET",
@@ -526,9 +528,14 @@
 		console.log(datajson);
 		var tm=null;
 		var i=$(this).attr('value');
-		var url1="{{ route('data.update',"+datajson[i].id")}}";
-		console.log(url1);
-		$('#f1').attr('action',url1);
+		var x=datajson[i].id;
+		$('#f2').attr('action',function(n,v){
+			if (url==null){
+				url=v;
+			}
+			console.log(url);
+			return url+"/"+x;
+		});
 		$('#region').text(datajson[i].countries.name+"/"+datajson[i].states.name+"/"+datajson[i].cities.name);
 		$("input[name='title']" ).val(datajson[i].title);
 		tm=$.grep(datajson[i].months, function (h) {return h.parameter_id == 10});

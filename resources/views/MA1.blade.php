@@ -89,7 +89,7 @@
     			data: $('#form').serialize(),
     			success: function (dataTableJson) {
   			 	console.log(dataTableJson);
-              	lava.loadData('temperature_vs_capacity', dataTableJson.data1, function (chart) {
+  			 	       	lava.loadData('temperature_vs_capacity', dataTableJson.data1, function (chart) {
                 		console.log('chart 1 loadData callback');
                 		console.log(chart);
              	});

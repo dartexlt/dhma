@@ -17,9 +17,9 @@
 		</div>
 	@endif
 	<h1> {{$model->nhv}}</h1>
-<h1> {{$model->months->where('parameter_id', '3')->pluck('january')}}</h1>
-<h1> {{$model->months->where('parameter_id', '3')->first()->may}}</h1>
-<h1> {{$model->months->where('parameter_id', '3')->first()->june}}</h1>
+<h1> {{$model->months->where('parameter_id', '4')->pluck('january')}}</h1>
+<h1> {{$model->months->where('parameter_id', '4')->first()->may}}</h1>
+<h1> {{$model->months->where('parameter_id', '4')->first()->june}}</h1>
 	{!! Form::open([''=>'']) !!}
 		
 	{!! Form::close() !!}

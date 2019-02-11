@@ -33,8 +33,12 @@ class CalculationController extends Controller
         $heatingSeason=array();
             $i=0;
             foreach (array('January', 'February','March','April','May','June','July','August','September','October','November','December') as $tmp) {
-                $heatingSeason[$i]=(int)$request->$tmp;                
-                $i++;
+                if($request->has($tmp)){
+                    array_push($heatingSeason,1);
+                }
+                else{
+                    array_push($heatingSeason,0);   
+                }
             }
         $temp=0;
         $sumxy=0;
@@ -303,8 +307,12 @@ public function model(Request $request)
             $heatingSeason=array();
             $i=0;
             foreach (array('January', 'February','March','April','May','June','July','August','September','October','November','December') as $tmp) {
-                $heatingSeason[$i]=(int)$request->$tmp;                
-                $i++;
+                if($request->has($tmp)){
+                    array_push($heatingSeason,1);
+                }
+                else{
+                    array_push($heatingSeason,0);   
+                }
             }
             $temp=0;
             $sumxy=0;
@@ -438,18 +446,18 @@ public function model(Request $request)
             $month->save();
             $month = new Month;
             $month->heat_model_id=$hm->id;
-            $month->january=$request->January;
-            $month->february=$request->February;
-            $month->march=$request->March;
-            $month->april=$request->April;
-            $month->may=$request->May;
-            $month->june=$request->June;
-            $month->july=$request->July;
-            $month->august=$request->August;
-            $month->september=$request->September;
-            $month->october=$request->October;
-            $month->november=$request->November;
-            $month->december=$request->December;
+            $month->january=$heatingSeason[0];
+            $month->february=$heatingSeason[1];
+            $month->march=$heatingSeason[2];
+            $month->april=$heatingSeason[3];
+            $month->may=$heatingSeason[4];
+            $month->june=$heatingSeason[5];
+            $month->july=$heatingSeason[6];
+            $month->august=$heatingSeason[7];
+            $month->september=$heatingSeason[8];
+            $month->october=$heatingSeason[9];
+            $month->november=$heatingSeason[10];
+            $month->december=$heatingSeason[11];
             $month->parameter_id=10;
             $month->save();
                 Session::flash('success','Data successfully saved');
@@ -537,8 +545,12 @@ public function modelSaveDB(Request $request)
             $heatingSeason=array();
             $i=0;
             foreach (array('January', 'February','March','April','May','June','July','August','September','October','November','December') as $tmp) {
-                $heatingSeason[$i]=(int)$request->$tmp;                
-                $i++;
+                if($request->has($tmp)){
+                    array_push($heatingSeason,1);
+                }
+                else{
+                    array_push($heatingSeason,0);   
+                }
             }
             $temp=0;
             $sumxy=0;
@@ -657,18 +669,18 @@ public function modelSaveDB(Request $request)
             $month->save();
             $month = new Month;
             $month->heat_model_id=$hm->id;
-            $month->january=$request->January;
-            $month->february=$request->February;
-            $month->march=$request->March;
-            $month->april=$request->April;
-            $month->may=$request->May;
-            $month->june=$request->June;
-            $month->july=$request->July;
-            $month->august=$request->August;
-            $month->september=$request->September;
-            $month->october=$request->October;
-            $month->november=$request->November;
-            $month->december=$request->December;
+            $month->january=$heatingSeason[0];
+            $month->february=$heatingSeason[1];
+            $month->march=$heatingSeason[2];
+            $month->april=$heatingSeason[3];
+            $month->may=$heatingSeason[4];
+            $month->june=$heatingSeason[5];
+            $month->july=$heatingSeason[6];
+            $month->august=$heatingSeason[7];
+            $month->september=$heatingSeason[8];
+            $month->october=$heatingSeason[9];
+            $month->november=$heatingSeason[10];
+            $month->december=$heatingSeason[11];
             $month->parameter_id=10;
             $month->save();
             Session::flash('success','Data successfully saved');

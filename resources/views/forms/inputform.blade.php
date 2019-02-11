@@ -1,6 +1,6 @@
 <div class="row mt-1">
 	<div class="col-sm-2 text-right">
-		<input type="hidden" name={{$month}} id={{$month}} value=0>
+		{{-- <input type="hidden" name={{$month}} id={{$month}} value=0> --}}
 		<input class="form-check-input" type="checkbox" value=1 name={{$month}} id={{$month}}  {{$c}}>
 	</div>
 	<div class="col-sm-2">
