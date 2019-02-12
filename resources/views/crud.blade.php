@@ -344,16 +344,16 @@
 									<label>Total Operating Hours in a Year at Apropriate Outdor Temperatures:</label>
 								</div>
 							</div>
-							@include('forms.climate_data_input',['title' => 'h83','label' => 'Total Hours in a Year [h]','value'=>''])
-							@include('forms.climate_data_input',['title' => 'h82','label' => 'Total Hours in a Heating Season [h]','value'=>''])
-							@include('forms.climate_data_input',['title' => 'h8','label' => 'Total Operating Hours at <8°C [h]','value'=>''])
-							@include('forms.climate_data_input',['title' => 'h5','label' => 'Total Operating Hours at <5°C [h]','value'=>''])
-							@include('forms.climate_data_input',['title' => 'h0','label' => 'Total Operating Hours at <0°C [h]','value'=>''])
-							@include('forms.climate_data_input',['title' => 'h_5','label' => 'Total Operating Hours at <-5°C [h]','value'=>''])
-							@include('forms.climate_data_input',['title' => 'h_10','label' => 'Total Operating Hours at <-10°C [h]','value'=>''])
-							@include('forms.climate_data_input',['title' => 'h_15','label' => 'Total Operating Hours at <-15°C [h]','value'=>''])
-							@include('forms.climate_data_input',['title' => 'h_20','label' => 'Total Operating Hours at <-20°C [h]','value'=>''])
-							@include('forms.climate_data_input',['title' => 'h_25','label' => 'Total Operating Hours at <-25°C [h]','value'=>''])
+					@include('forms.climate_data_input',['title' => 'h83','label' => 'Total Hours in a Year [h]','value'=>'8760'])
+					@include('forms.climate_data_input',['title' => 'h82','label' => 'Total Hours in a Heating Season [h]','value'=>'4872'])
+					@include('forms.climate_data_input',['title' => 'h8','label' => 'Total Operating Hours at <8°C [h]','value'=>'4872','t'=>'8'])
+					@include('forms.climate_data_input',['title' => 'h5','label' => 'Total Operating Hours at <5°C [h]','value'=>'3989','t'=>'5'])
+					@include('forms.climate_data_input',['title' => 'h0','label' => 'Total Operating Hours at <0°C [h]','value'=>'2835','t'=>'0'])
+					@include('forms.climate_data_input',['title' => 'h_5','label' => 'Total Operating Hours at <-5°C [h]','value'=>'1050','t'=>'-5'])
+					@include('forms.climate_data_input',['title' => 'h_10','label' => 'Total Operating Hours at <-10°C [h]','value'=>'518','t'=>'-10'])
+					@include('forms.climate_data_input',['title' => 'h_15','label' => 'Total Operating Hours at <-15°C [h]','value'=>'305','t'=>'-15'])
+					@include('forms.climate_data_input',['title' => 'h_20','label' => 'Total Operating Hours at <-20°C [h]','value'=>'104','t'=>'-20'])
+					@include('forms.climate_data_input',['title' => 'h_25','label' => 'Total Operating Hours at <-25°C [h]','value'=>'14','t'=>'-25'])
 						</div>
 						<div class="col-sm-7">
 							<div class ="row  mt-1">
@@ -483,9 +483,11 @@
 <div id="deleteModel" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form>
+			<form method="POST" id="f3" action="{{url('data')}}">
+				@csrf
+				<input name="_method" type="hidden" value="DELETE">
 				<div class="modal-header">						
-					<h4 class="modal-title">Delete Employee</h4>
+					<h4 class="modal-title">Delete Heat Model</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">					
@@ -494,7 +496,7 @@
 				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-danger" value="Delete">
+					<input type="submit" class="btn btn-danger" value="delete">
 				</div>
 			</form>
 		</div>
@@ -516,7 +518,7 @@
  				data.forEach(function(object) {
 					$('tbody').append("<tr><td>"+object.countries.name+"/"+object.states.name+"/"+object.cities.name+"</td><td>"+object.title+"</td><td>\
                         <a href=\"#editModel\" class=\"edit\" data-toggle=\"modal\" value="+i+"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Edit\">&#xE254;</i></a>\
-                        <a href=\"#deleteModel\" class=\"delete\" data-toggle=\"modal\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Delete\">&#xE872;</i></a></td></tr>");
+                        <a href=\"#deleteModel\" class=\"delete\" data-toggle=\"modal\" value="+i+"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Delete\">&#xE872;</i></a></td></tr>");
 					i++;
 				});
 					
@@ -524,6 +526,20 @@
  		});
 
 	});
+
+		$(document).on("click",".delete",function() {
+			console.log(datajson);
+			var i=$(this).attr('value');
+			var x=datajson[i].id;
+			$('#f3').attr('action',function(n,v){
+				if (url==null){
+					url=v;
+				}
+				console.log(url);
+				return url+"/"+x;
+			});
+		});
+
 	$(document).on("click",".edit",function() {
 		console.log(datajson);
 		var tm=null;

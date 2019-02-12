@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use DB;
 use Lava;
 use Khill\Lavacharts\Lavacharts;
+use App\Country;
+use App\State;
+use App\City;
 
 class PagesController extends Controller
 {
@@ -44,14 +47,14 @@ class PagesController extends Controller
     	return view('multicriteriaAnalysis');
     }
     public function getModel(){
-        $countries = DB::table("countries")->pluck("name","id");
+        $countries = Country::pluck("name","id");
         return view('districtModel',compact('countries'));
     }
     public function getIndex(){
     	return view('welcome');
     }
     public function getCrud(){
-        $countries = DB::table("countries")->pluck("name","id");
+        $countries = Country::pluck("name","id");
         return view('crud',compact('countries'));
     }
 }

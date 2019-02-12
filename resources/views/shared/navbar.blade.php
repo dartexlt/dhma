@@ -17,9 +17,9 @@
               <a class="dropdown-item" href="/ma1">1 Method</a>
               <a class="dropdown-item" href="/ma2">2 Method</a>
               {{-- <a class="dropdown-item" href="/ma3">3 Method</a> --}}
-              <a class="dropdown-item" href="/model">District Model</a>
+              <a class="dropdown-item" href="/model" method="post">District Model</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="data" method="get">Multicriteria analysis</a>
+              <a class="dropdown-item" href={{route('data.index')}} method="get">Multicriteria analysis</a>
             </div>
         </li>
         <li class="nav-item">
