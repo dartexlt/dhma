@@ -61,7 +61,7 @@ class DataController extends Controller
         $hm->title=$request->title;
 
 
-       $validator = \Validator::make($request->all(), array('title'=>'required', 'QJanuary'=>'required|numeric','hJanuary'=>'required|numeric','tJanuary'=>'required|numeric','QFebruary'=>'required|numeric','hFebruary'=>'required|numeric','tFebruary'=>'required|numeric','QMarch'=>'required|numeric','hMarch'=>'required|numeric','tMarch'=>'required|numeric','QApril'=>'required|numeric','hApril'=>'required|numeric','tApril'=>'required|numeric','QMay'=>'required|numeric','hMay'=>'required|numeric','tMay'=>'required|numeric','QJune'=>'required|numeric','hJune'=>'required|numeric','tJune'=>'required|numeric','QJuly'=>'required|numeric','hJuly'=>'required|numeric','tJuly'=>'required|numeric','QAugust'=>'required|numeric','hAugust'=>'required|numeric','tAugust'=>'required|numeric','QSeptember'=>'required|numeric','hSeptember'=>'required|numeric','tSeptember'=>'required|numeric','QOctober'=>'required|numeric','hOctober'=>'required|numeric','tOctober'=>'required|numeric','QNovember'=>'required|numeric','hNovember'=>'required|numeric','tNovember'=>'required|numeric','QDecember'=>'required|numeric','hDecember'=>'required|numeric','tDecember'=>'required|numeric','h83'=>'required|numeric','h82'=>'required|numeric','h8'=>'required|numeric','h5'=>'required|numeric','h0'=>'required|numeric','h_5'=>'required|numeric','h_10'=>'required|numeric','h_15'=>'required|numeric','h_20'=>'required|numeric','h_25'=>'required|numeric'));
+       $validator = \Validator::make($request->all(), array('title'=>'required', 'QJanuary'=>'required|numeric','hJanuary'=>'required|numeric','tJanuary'=>'required|numeric','QFebruary'=>'required|numeric','hFebruary'=>'required|numeric','tFebruary'=>'required|numeric','QMarch'=>'required|numeric','hMarch'=>'required|numeric','tMarch'=>'required|numeric','QApril'=>'required|numeric','hApril'=>'required|numeric','tApril'=>'required|numeric','QMay'=>'required|numeric','hMay'=>'required|numeric','tMay'=>'required|numeric','QJune'=>'required|numeric','hJune'=>'required|numeric','tJune'=>'required|numeric','QJuly'=>'required|numeric','hJuly'=>'required|numeric','tJuly'=>'required|numeric','QAugust'=>'required|numeric','hAugust'=>'required|numeric','tAugust'=>'required|numeric','QSeptember'=>'required|numeric','hSeptember'=>'required|numeric','tSeptember'=>'required|numeric','QOctober'=>'required|numeric','hOctober'=>'required|numeric','tOctober'=>'required|numeric','QNovember'=>'required|numeric','hNovember'=>'required|numeric','tNovember'=>'required|numeric','QDecember'=>'required|numeric','hDecember'=>'required|numeric','tDecember'=>'required|numeric','h83'=>'required|numeric','h82'=>'required|numeric','h8'=>'required|numeric','h5'=>'required|numeric','h0'=>'required|numeric','h_5'=>'required|numeric','h_10'=>'required|numeric','h_15'=>'required|numeric','h_20'=>'required|numeric','h_25'=>'required|numeric','fixedh8'=>'required|numeric','fixedh5'=>'required|numeric','fixedh0'=>'required|numeric','fixedh_5'=>'required|numeric','fixedh_10'=>'required|numeric','fixedh_15'=>'required|numeric','fixedh_20'=>'required|numeric','fixedh_25'=>'required|numeric'));
         if ($validator->passes()){ //1 calculation method
 
             $Q=array($request->QJanuary,$request->QFebruary,$request->QMarch,$request->QApril, $request->QMay, $request->QJune, $request->QJuly, $request->QAugust, $request->QSeptember, $request->QOctober, $request->QNovember, $request->QDecember);
@@ -117,7 +117,7 @@ class DataController extends Controller
                     $temp_capacity->addRow([$t[$key], $N[$key],$tt]);
                 }             
             }
-            $tfixed=array(8,5,0,-5,-10,-15,-20,-25);
+            $tfixed=array($request->fixedh8, $request->fixedh5, $request->fixedh0, $request->fixedh_5, $request->fixedh_10, $request->fixedh_15, $request->fixedh_20,$request->fixedh_25);
             $Nfixed=array($Nhv,$Nhv);
             foreach ($tfixed as $key => $value) {
                 $Nfixed[$key+2]=$a*$tfixed[$key]+$b;
@@ -148,6 +148,14 @@ class DataController extends Controller
             $hm->h_15=$request->h_15;
             $hm->h_20=$request->h_20;
             $hm->h_25=$request->h_25;
+            $hm->t1=$request->fixedh8;
+            $hm->t2=$request->fixedh5;
+            $hm->t3=$request->fixedh0;
+            $hm->t4=$request->fixedh_5;
+            $hm->t5=$request->fixedh_10;
+            $hm->t6=$request->fixedh_15;
+            $hm->t7=$request->fixedh_20;
+            $hm->t8=$request->fixedh_25;
             $hm->save();
             $month = new Month;
             $month->heat_model_id=$hm->id;
@@ -216,10 +224,10 @@ class DataController extends Controller
             Session::flash('success','Data successfully saved');
             // return view('calc.result');
         }
-        $validator = \Validator::make($request->all(), array('title'=>'required', 'Nave'=>'required|numeric','N2hw'=>'required|numeric','Nl'=>'required|numeric','tao'=>'required|numeric','tar'=>'required|numeric','h83'=>'required|numeric','h82'=>'required|numeric','h8'=>'required|numeric','h5'=>'required|numeric','h0'=>'required|numeric','h_5'=>'required|numeric','h_10'=>'required|numeric','h_15'=>'required|numeric','h_20'=>'required|numeric','h_25'=>'required|numeric'));
+        $validator = \Validator::make($request->all(), array('title'=>'required', 'Nave'=>'required|numeric','N2hw'=>'required|numeric','Nl'=>'required|numeric','tao'=>'required|numeric','tar'=>'required|numeric','h83'=>'required|numeric','h82'=>'required|numeric','h8'=>'required|numeric','h5'=>'required|numeric','h0'=>'required|numeric','h_5'=>'required|numeric','h_10'=>'required|numeric','h_15'=>'required|numeric','h_20'=>'required|numeric','h_25'=>'required|numeric','fixedh8'=>'required|numeric','fixedh5'=>'required|numeric','fixedh0'=>'required|numeric','fixedh_5'=>'required|numeric','fixedh_10'=>'required|numeric','fixedh_15'=>'required|numeric','fixedh_20'=>'required|numeric','fixedh_25'=>'required|numeric'));
         if ($validator->passes()){
             $hnr= array($request->h83, $request->h82, $request->h8, $request->h5, $request->h0, $request->h_5, $request->h_10, $request->h_15, $request->h_20, $request->h_25);
-             $tfixed=array(8,5,0,-5,-10,-15,-20.7,-25);
+             $tfixed=array($request->fixedh8, $request->fixedh5, $request->fixedh0, $request->fixedh_5, $request->fixedh_10, $request->fixedh_15, $request->fixedh_20,$request->fixedh_25);
              $knr=array();
             foreach ($tfixed as $key => $value) {
                 $knr[$key]=($request->tar-$tfixed[$key])/($request->tar-$request->tao);
@@ -260,6 +268,14 @@ class DataController extends Controller
             $hm->h_15=$request->h_15;
             $hm->h_20=$request->h_20;
             $hm->h_25=$request->h_25;
+            $hm->t1=$request->fixedh8;
+            $hm->t2=$request->fixedh5;
+            $hm->t3=$request->fixedh0;
+            $hm->t4=$request->fixedh_5;
+            $hm->t5=$request->fixedh_10;
+            $hm->t6=$request->fixedh_15;
+            $hm->t7=$request->fixedh_20;
+            $hm->t8=$request->fixedh_25;
             $hm->save();
             Session::flash('success','Data successfully saved');  
         }
@@ -315,7 +331,7 @@ class DataController extends Controller
     {
         $hm= HeatModel::where("id", $id)->first();
         $hm->title=$request->title;
-        $validator = \Validator::make($request->all(), array('title'=>'required', 'QJanuary'=>'required|numeric','hJanuary'=>'required|numeric','tJanuary'=>'required|numeric','QFebruary'=>'required|numeric','hFebruary'=>'required|numeric','tFebruary'=>'required|numeric','QMarch'=>'required|numeric','hMarch'=>'required|numeric','tMarch'=>'required|numeric','QApril'=>'required|numeric','hApril'=>'required|numeric','tApril'=>'required|numeric','QMay'=>'required|numeric','hMay'=>'required|numeric','tMay'=>'required|numeric','QJune'=>'required|numeric','hJune'=>'required|numeric','tJune'=>'required|numeric','QJuly'=>'required|numeric','hJuly'=>'required|numeric','tJuly'=>'required|numeric','QAugust'=>'required|numeric','hAugust'=>'required|numeric','tAugust'=>'required|numeric','QSeptember'=>'required|numeric','hSeptember'=>'required|numeric','tSeptember'=>'required|numeric','QOctober'=>'required|numeric','hOctober'=>'required|numeric','tOctober'=>'required|numeric','QNovember'=>'required|numeric','hNovember'=>'required|numeric','tNovember'=>'required|numeric','QDecember'=>'required|numeric','hDecember'=>'required|numeric','tDecember'=>'required|numeric','h83'=>'required|numeric','h82'=>'required|numeric','h8'=>'required|numeric','h5'=>'required|numeric','h0'=>'required|numeric','h_5'=>'required|numeric','h_10'=>'required|numeric','h_15'=>'required|numeric','h_20'=>'required|numeric','h_25'=>'required|numeric'));
+        $validator = \Validator::make($request->all(), array('title'=>'required', 'QJanuary'=>'required|numeric','hJanuary'=>'required|numeric','tJanuary'=>'required|numeric','QFebruary'=>'required|numeric','hFebruary'=>'required|numeric','tFebruary'=>'required|numeric','QMarch'=>'required|numeric','hMarch'=>'required|numeric','tMarch'=>'required|numeric','QApril'=>'required|numeric','hApril'=>'required|numeric','tApril'=>'required|numeric','QMay'=>'required|numeric','hMay'=>'required|numeric','tMay'=>'required|numeric','QJune'=>'required|numeric','hJune'=>'required|numeric','tJune'=>'required|numeric','QJuly'=>'required|numeric','hJuly'=>'required|numeric','tJuly'=>'required|numeric','QAugust'=>'required|numeric','hAugust'=>'required|numeric','tAugust'=>'required|numeric','QSeptember'=>'required|numeric','hSeptember'=>'required|numeric','tSeptember'=>'required|numeric','QOctober'=>'required|numeric','hOctober'=>'required|numeric','tOctober'=>'required|numeric','QNovember'=>'required|numeric','hNovember'=>'required|numeric','tNovember'=>'required|numeric','QDecember'=>'required|numeric','hDecember'=>'required|numeric','tDecember'=>'required|numeric','h83'=>'required|numeric','h82'=>'required|numeric','h8'=>'required|numeric','h5'=>'required|numeric','h0'=>'required|numeric','h_5'=>'required|numeric','h_10'=>'required|numeric','h_15'=>'required|numeric','h_20'=>'required|numeric','h_25'=>'required|numeric','fixedh8'=>'required|numeric','fixedh5'=>'required|numeric','fixedh0'=>'required|numeric','fixedh_5'=>'required|numeric','fixedh_10'=>'required|numeric','fixedh_15'=>'required|numeric','fixedh_20'=>'required|numeric','fixedh_25'=>'required|numeric'));
         if ($validator->passes()){ //1 calculation method
 
             $Q=array($request->QJanuary,$request->QFebruary,$request->QMarch,$request->QApril, $request->QMay, $request->QJune, $request->QJuly, $request->QAugust, $request->QSeptember, $request->QOctober, $request->QNovember, $request->QDecember);
@@ -371,7 +387,7 @@ class DataController extends Controller
                     $temp_capacity->addRow([$t[$key], $N[$key],$tt]);
                 }             
             }
-            $tfixed=array(8,5,0,-5,-10,-15,-20,-25);
+            $tfixed=array($request->fixedh8, $request->fixedh5, $request->fixedh0, $request->fixedh_5, $request->fixedh_10, $request->fixedh_15, $request->fixedh_20,$request->fixedh_25);
             $Nfixed=array($Nhv,$Nhv);
             foreach ($tfixed as $key => $value) {
                 $Nfixed[$key+2]=$a*$tfixed[$key]+$b;
@@ -402,6 +418,14 @@ class DataController extends Controller
             $hm->h_15=$request->h_15;
             $hm->h_20=$request->h_20;
             $hm->h_25=$request->h_25;
+            $hm->t1=$request->fixedh8;
+            $hm->t2=$request->fixedh5;
+            $hm->t3=$request->fixedh0;
+            $hm->t4=$request->fixedh_5;
+            $hm->t5=$request->fixedh_10;
+            $hm->t6=$request->fixedh_15;
+            $hm->t7=$request->fixedh_20;
+            $hm->t8=$request->fixedh_25;
             $hm->save();
             $month=Month::where("heat_model_id", $hm->id)->where("parameter_id", 1)->first();
             $month->january=$request->QJanuary;
@@ -462,10 +486,10 @@ class DataController extends Controller
             Session::flash('success','Data successfully updated');
             // return view('calc.result');
         }
-        $validator = \Validator::make($request->all(), array('title'=>'required', 'Nave'=>'required|numeric','N2hw'=>'required|numeric','Nl'=>'required|numeric','tao'=>'required|numeric','tar'=>'required|numeric','h83'=>'required|numeric','h82'=>'required|numeric','h8'=>'required|numeric','h5'=>'required|numeric','h0'=>'required|numeric','h_5'=>'required|numeric','h_10'=>'required|numeric','h_15'=>'required|numeric','h_20'=>'required|numeric','h_25'=>'required|numeric'));
+        $validator = \Validator::make($request->all(), array('title'=>'required', 'Nave'=>'required|numeric','N2hw'=>'required|numeric','Nl'=>'required|numeric','tao'=>'required|numeric','tar'=>'required|numeric','h83'=>'required|numeric','h82'=>'required|numeric','h8'=>'required|numeric','h5'=>'required|numeric','h0'=>'required|numeric','h_5'=>'required|numeric','h_10'=>'required|numeric','h_15'=>'required|numeric','h_20'=>'required|numeric','h_25'=>'required|numeric','fixedh8'=>'required|numeric','fixedh5'=>'required|numeric','fixedh0'=>'required|numeric','fixedh_5'=>'required|numeric','fixedh_10'=>'required|numeric','fixedh_15'=>'required|numeric','fixedh_20'=>'required|numeric','fixedh_25'=>'required|numeric'));
         if ($validator->passes()){
             $hnr= array($request->h83, $request->h82, $request->h8, $request->h5, $request->h0, $request->h_5, $request->h_10, $request->h_15, $request->h_20, $request->h_25);
-             $tfixed=array(8,5,0,-5,-10,-15,-20.7,-25);
+             $tfixed=array($request->fixedh8, $request->fixedh5, $request->fixedh0, $request->fixedh_5, $request->fixedh_10, $request->fixedh_15, $request->fixedh_20,$request->fixedh_25);
              $knr=array();
             foreach ($tfixed as $key => $value) {
                 $knr[$key]=($request->tar-$tfixed[$key])/($request->tar-$request->tao);
@@ -506,6 +530,14 @@ class DataController extends Controller
             $hm->h_15=$request->h_15;
             $hm->h_20=$request->h_20;
             $hm->h_25=$request->h_25;
+            $hm->t1=$request->fixedh8;
+            $hm->t2=$request->fixedh5;
+            $hm->t3=$request->fixedh0;
+            $hm->t4=$request->fixedh_5;
+            $hm->t5=$request->fixedh_10;
+            $hm->t6=$request->fixedh_15;
+            $hm->t7=$request->fixedh_20;
+            $hm->t8=$request->fixedh_25;
             $hm->save();
             Session::flash('success','Data successfully updated');  
         }

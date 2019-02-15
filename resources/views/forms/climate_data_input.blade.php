@@ -9,7 +9,7 @@
 	@else
 		<div class="col-sm-9">
 			<label for=var{{$title}} class="col-sm-12 col-form-label col-form-label-sm">Total Operating Hours at <
-					<input class="form-control-sm" name=fixed{{$title}} placeholder="e.g. {{$t}}" value={{$t}} required data-parsley-type="number" size="3">
+					<input class="form-control-sm" name="fixed{{$title}}" placeholder="e.g. {{$t}}" value={{$t}} required data-parsley-type="number" size="3">
 			°C [h] </label>
 		</div>
 		<div class="col-sm-3">

@@ -35,6 +35,14 @@ class CreateHeatModelsTable extends Migration
             $table->float('N_15')->nullable();
             $table->float('N_20')->nullable();
             $table->float('N_25')->nullable();
+            $table->float('t1')->nullable();
+            $table->float('t2')->nullable();
+            $table->float('t3')->nullable();
+            $table->float('t4')->nullable();
+            $table->float('t5')->nullable();
+            $table->float('t6')->nullable();
+            $table->float('t7')->nullable();
+            $table->float('t8')->nullable();
             $table->float('h83')->nullable();
             $table->float('h82')->nullable();
             $table->float('h8')->nullable();
@@ -59,6 +67,7 @@ class CreateHeatModelsTable extends Migration
             $table->float('x7')->nullable();
             $table->float('x8')->nullable();
             $table->float('x9')->nullable();
+            $table->unsignedInteger('createdBy')->nullable();
             $table->timestamps();
         });
     }

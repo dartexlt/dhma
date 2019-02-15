@@ -275,18 +275,6 @@
             <tbody>
 			</tbody>
         </table>
-		<div class="clearfix">
-            <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-            <ul class="pagination">
-                <li class="page-item disabled"><a href="#">Previous</a></li>
-                <li class="page-item"><a href="#" class="page-link">1</a></li>
-                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                <li class="page-item"><a href="#" class="page-link">4</a></li>
-                <li class="page-item"><a href="#" class="page-link">5</a></li>
-                <li class="page-item"><a href="#" class="page-link">Next</a></li>
-            </ul>
-        </div>
     </div>
 </div>
 <!-- Edit Modal HTML -->
@@ -346,14 +334,14 @@
 							</div>
 					@include('forms.climate_data_input',['title' => 'h83','label' => 'Total Hours in a Year [h]','value'=>'8760'])
 					@include('forms.climate_data_input',['title' => 'h82','label' => 'Total Hours in a Heating Season [h]','value'=>'4872'])
-					@include('forms.climate_data_input',['title' => 'h8','label' => 'Total Operating Hours at <8°C [h]','value'=>'4872','t'=>'8'])
-					@include('forms.climate_data_input',['title' => 'h5','label' => 'Total Operating Hours at <5°C [h]','value'=>'3989','t'=>'5'])
-					@include('forms.climate_data_input',['title' => 'h0','label' => 'Total Operating Hours at <0°C [h]','value'=>'2835','t'=>'0'])
-					@include('forms.climate_data_input',['title' => 'h_5','label' => 'Total Operating Hours at <-5°C [h]','value'=>'1050','t'=>'-5'])
-					@include('forms.climate_data_input',['title' => 'h_10','label' => 'Total Operating Hours at <-10°C [h]','value'=>'518','t'=>'-10'])
-					@include('forms.climate_data_input',['title' => 'h_15','label' => 'Total Operating Hours at <-15°C [h]','value'=>'305','t'=>'-15'])
-					@include('forms.climate_data_input',['title' => 'h_20','label' => 'Total Operating Hours at <-20°C [h]','value'=>'104','t'=>'-20'])
-					@include('forms.climate_data_input',['title' => 'h_25','label' => 'Total Operating Hours at <-25°C [h]','value'=>'14','t'=>'-25'])
+					@include('forms.climate_data_input',['title' => 'h8','label' => 'Total Operating Hours at <8°C [h]','value'=>'4872','t'=>''])
+					@include('forms.climate_data_input',['title' => 'h5','label' => 'Total Operating Hours at <5°C [h]','value'=>'3989','t'=>''])
+					@include('forms.climate_data_input',['title' => 'h0','label' => 'Total Operating Hours at <0°C [h]','value'=>'2835','t'=>''])
+					@include('forms.climate_data_input',['title' => 'h_5','label' => 'Total Operating Hours at <-5°C [h]','value'=>'1050','t'=>''])
+					@include('forms.climate_data_input',['title' => 'h_10','label' => 'Total Operating Hours at <-10°C [h]','value'=>'518','t'=>''])
+					@include('forms.climate_data_input',['title' => 'h_15','label' => 'Total Operating Hours at <-15°C [h]','value'=>'305','t'=>''])
+					@include('forms.climate_data_input',['title' => 'h_20','label' => 'Total Operating Hours at <-20°C [h]','value'=>'104','t'=>''])
+					@include('forms.climate_data_input',['title' => 'h_25','label' => 'Total Operating Hours at <-25°C [h]','value'=>'14','t'=>''])
 						</div>
 						<div class="col-sm-7">
 							<div class ="row  mt-1">
@@ -671,6 +659,15 @@
 		$("input[name='x7']" ).val(datajson[i].x7);
 		$("input[name='x8']" ).val(datajson[i].x8);
 		$("input[name='x9']" ).val(datajson[i].x9);
+
+		$("input[name='fixedh8']" ).val(datajson[i].t1);
+		$("input[name='fixedh5']" ).val(datajson[i].t2);
+		$("input[name='fixedh0']" ).val(datajson[i].t3);
+		$("input[name='fixedh_5']" ).val(datajson[i].t4);
+		$("input[name='fixedh_10']" ).val(datajson[i].t5);
+		$("input[name='fixedh_15']" ).val(datajson[i].t6);
+		$("input[name='fixedh_20']" ).val(datajson[i].t7);
+		$("input[name='fixedh_25']" ).val(datajson[i].t8);
 	});
 
 	$('#country').change(function(){
