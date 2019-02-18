@@ -1,4 +1,4 @@
-@extends('main')
+@extends('shared.main')
 @section('title', 'District Model')
 @section('stylesheets')
 <link rel="stylesheet" href="/css/parsley.css">

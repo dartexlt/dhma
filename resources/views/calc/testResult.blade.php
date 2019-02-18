@@ -1,4 +1,4 @@
-@extends('main')
+@extends('shared.main')
 @section('title', 'Home')
 @section('content')
 

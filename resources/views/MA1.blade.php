@@ -1,10 +1,10 @@
-@extends('main')
+@extends('shared.main')
 @section('title', 'Multicriteria Analysis')
 @section('stylesheets')
 <link rel="stylesheet" href="/css/parsley.css">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 @endsection
 @section('content')
-{{-- <form id="form" method="post" action="{{url('calc')}}" data-parsley-validate> --}}
 <div class="container">
 	<form id="form" method="post" data-parsley-validate>
 		<div class="form-group">
@@ -79,7 +79,33 @@
 	@linechart('operating_vs_load', 'f2')
 </div>
 
+
+
+
+
+
 <script type="text/javascript">
+	google.charts.load('current', {'packages':['corechart']});
+
+	function drawLineChart1(data) {
+		var options = {'title' :'Temperature vs Heat Capacity ',
+			'hAxis' :{'title' : 'Average outdoor temperature, [°C]'},
+            'vAxis' : {'title' : 'Heat Capacity, [MW]'}, 
+            'legend' : {'position' : 'top', 'alignment':'end'}, 
+            'height':300,
+            'series' : {0: {'type' : 'line','lineWidth':0,'pointSize':5}, 1 : {'type' : 'line','lineWidth':1,'pointSize':0 }}};
+ 		var chart = new google.visualization.LineChart(document.getElementById('f1'));
+		chart.draw(data, options);
+	}
+
+	function drawLineChart2(data) {
+		var options = {'title':'Operating Hours vs Heat Load', 'hAxis' : {'title' : 'Operating hours per year, [h]'},'vAxis' : {'title' : 'Heat Load, [MW]'}, 'legend' : {'position' : 'top', 'alignment':'end'}, 'lineWidth':1, 'pointSize':5, 'height':300, 'interpolateNulls': true,};
+ 		var chart = new google.visualization.LineChart(document.getElementById('f2'));
+		chart.draw(data, options);
+	}
+
+
+
 	$(document).ready(function() {
     	$('#b1').click(function(){
     		$.ajax({
@@ -87,16 +113,24 @@
     			url: "/Amet1",
     			data: $('#form').serialize(),
     			success: function (dataTableJson) {
-  			 	console.log(dataTableJson);
-  			 	       	lava.loadData('temperature_vs_capacity', dataTableJson.data1, function (chart) {
-                		console.log('chart 1 loadData callback');
-                		console.log(chart);
-             	});
-              	lava.loadData('operating_vs_load', dataTableJson.data2, function (chart) {
-              		console.log('chart 2 loadData callback');
-         		console.log(chart);
- 	 });
-  			 }
+					if (dataTableJson!=null){
+		    	 		var d1=google.visualization.arrayToDataTable($.parseJSON(dataTableJson.tem_cap));
+		    	 		var d2=google.visualization.arrayToDataTable($.parseJSON(dataTableJson.load));
+		    	 		drawLineChart1(d1);
+		    	 		drawLineChart2(d2);
+		    	 	}
+
+
+	  			 // 	console.log(dataTableJson);
+	  			 // 	       	lava.loadData('temperature_vs_capacity', dataTableJson.data1, function (chart) {
+	      //           		console.log('chart 1 loadData callback');
+	      //           		console.log(chart);
+	      //        	});
+	      //         	lava.loadData('operating_vs_load', dataTableJson.data2, function (chart) {
+	      //         		console.log('chart 2 loadData callback');
+	      //    		console.log(chart);
+	 	 			// });
+  			 	}
   			});
   		});
     });

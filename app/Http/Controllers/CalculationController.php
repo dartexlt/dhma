@@ -50,13 +50,8 @@ class CalculationController extends Controller
         $sumxx=0;
         $sumn=0;
         $Nhv=0; 
-        $temp_capacity = Lava::DataTable();
-        $operating_load = Lava::DataTable();
-		$temp_capacity->addNumberColumn('Average Outdoor Temperature C')
-           ->addNumberColumn('Heat Capacity [MW]')
-           ->addNumberColumn('Trend');
-        $operating_load->addNumberColumn('Operating Hours [h]')
-           ->addNumberColumn('Heat Load [MW]');
+		$temp_capacity[0]=['Average Outdoor Temperature C','Heat Capacity [MW]','Trend'];
+        $operating_load[0]=['Operating Hours [h]','Heat Load [MW]'];
         foreach ($N as $key => $value) {
         	if ($heatingSeason[$key]==0){
         		$Nhv=$Nhv+$N[$key];
@@ -72,10 +67,12 @@ class CalculationController extends Controller
         $Nhv=$Nhv/$temp;
         $a=(($sumn*$sumxy)-($sumx*$sumy))/(($sumn*$sumxx)-($sumx*$sumx));
         $b=($sumy-$a*$sumx)/$sumn;
+        $index=1;
         foreach ($t as $key => $value) {
         	if ($heatingSeason[$key]==1){
         		$tt=$a*$t[$key]+$b;
-        		$temp_capacity->addRow([$t[$key], $N[$key],$tt]);
+        		$temp_capacity[$index]=[$t[$key], $N[$key],$tt];
+                $index++;
         	}
         	
         }
@@ -87,7 +84,7 @@ class CalculationController extends Controller
         	$Nfixed[$key+2]=$a*$tfixed[$key]+$b;
         }
         foreach ($hnr as $key => $value) {
-			$operating_load->addRow( [$hnr[$key],$Nfixed[$key]]);
+			$operating_load[$key+1]=[$hnr[$key],$Nfixed[$key]];
         }
   //       Lava::LineChart('temperature_vs_capacity', $temp_capacity, [
   //       	'title' => 'Temperature vs Heat Capacity ',
@@ -105,7 +102,7 @@ class CalculationController extends Controller
         
         //return view('calc.result');
 
-        return array('data1' => $temp_capacity->toJson(),'data2' => $operating_load->toJson());
+        return array('tem_cap' => json_encode($temp_capacity),'load' => json_encode($operating_load));
       
     }
 

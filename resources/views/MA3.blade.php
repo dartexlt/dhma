@@ -1,4 +1,4 @@
-@extends('main')
+@extends('shared.main')
 @section('title', 'Multicriteria Analysis 3 method')
 @section('stylesheets')
 <link rel="stylesheet" href="/css/parsley.css">

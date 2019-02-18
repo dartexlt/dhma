@@ -43,15 +43,13 @@ class PagesController extends Controller
      public function getMA3(){
     	return view('MA3');
     }
-    public function getMA(){
-    	return view('multicriteriaAnalysis');
-    }
+
     public function getModel(){
         $countries = Country::pluck("name","id");
         return view('districtModel',compact('countries'));
     }
     public function getIndex(){
-    	return view('welcome');
+    	return view('home');
     }
     public function getCrud(){
         $countries = Country::pluck("name","id");

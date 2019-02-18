@@ -14,19 +14,19 @@
               Multicriteria Analysis
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/ma1">1 Method</a>
-              <a class="dropdown-item" href="/ma2">2 Method</a>
+              <a class="dropdown-item" href="/ma1">Heat Load Calculator 1</a>
+              <a class="dropdown-item" href="/ma2">Heat Load Calculator 2</a>
               {{-- <a class="dropdown-item" href="/ma3">3 Method</a> --}}
-              <a class="dropdown-item" href="/model" method="post">District Model</a>
+              <a class="dropdown-item" href="/model" method="post">Create District Model</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href={{route('data.index')}} method="get">Multicriteria analysis</a>
+              <a class="dropdown-item" href={{route('data.index')}} method="get">Multicriteria Analysis</a>
             </div>
         </li>
         <li class="nav-item">
-        <a class="nav-link contacts" href="/crud">UD</a>
+        <a class="nav-link contacts" href="/crud">Edit Models</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link contacts" href="/ma">About</a>
+        <a class="nav-link contacts" href="/">About</a>
         </li>
 </ul>
 <form class="form-inline my-2 my-lg-0">

@@ -15,7 +15,6 @@ Route::get('/', 'PagesController@getIndex');
 Route::get('/ma1', 'PagesController@getMA1');
 Route::get('/ma2', 'PagesController@getMA2');
 Route::get('/ma3', 'PagesController@getMA3');
-Route::get('/ma', 'PagesController@getMA');
 Route::get('/model', 'PagesController@getModel');
 Route::get('/crud', 'PagesController@getCrud')->name('crud');
 Route::resource('data', 'DataController');

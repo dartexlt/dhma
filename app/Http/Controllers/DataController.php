@@ -24,15 +24,7 @@ class DataController extends Controller
     public function index()
     {
         $countries = Country::pluck("name","id");
-        $operating_load = Lava::DataTable();
-        $operating_load->addNumberColumn('Operating Hours [h]')
-           ->addNumberColumn('Heat Load [MW]');
-        Lava::LineChart('operating_vs_load', $operating_load, ['title' => 'Operating Hours vs Heat Load', 'hAxis' => ['title' => 'Operating hours per year, [h]'],'vAxis' => ['title' => 'Heat Load, [MW]'], 'legend' => ['position' => 'top', 'alignment'=>'end'], 'lineWidth'=>1, 'pointSize'=>5, 'height'=>300]);
-        $bar = Lava::DataTable();
-        $bar->addStringColumn('Name')
-           ->addNumberColumn('Rank');
-        Lava::ColumnChart('multicriteria', $bar, ['title' => 'Multicriteria ranking', 'hAxis' => ['title' => 'Region'],'vAxis' => ['title' => 'Rank'], 'height'=>300]);
-        return view('search',compact('countries','operating_vs_load','multicriteria'));
+        return view('multicriteriaAnalysis',compact('countries'));
     }
 
     /**
@@ -600,60 +592,43 @@ class DataController extends Controller
     } 
     public function getCharts(Request $request)
     {
-        //if($request->ajax()){
-            $mod=HeatModel::whereIn("id",$request->ids)->get(); 
-            $operating_load = Lava::DataTable();
-            $operating_load->addNumberColumn('Operating Hours [h]');
-            $d1=array($mod[0]->h83);
-            $d2=array($mod[0]->h82);
-            $d3=array($mod[0]->h8);
-            $d4=array($mod[0]->h5);
-            $d5=array($mod[0]->h0);
-            $d6=array($mod[0]->h_5);
-            $d7=array($mod[0]->h_10);
-            $d8=array($mod[0]->h_15);
-            $d9=array($mod[0]->h_20);
-            $d10=array($mod[0]->h_25);
-            $data = array();
-            $titles=array();
-            foreach ($mod as $key => $value) {
-                array_push($data, array($value->x1,$value->x2,$value->x3,$value->x4,$value->x5,$value->x6,$value->x7,$value->x8,$value->x9));
-                $operating_load->addNumberColumn($value->title);
-                array_push($titles,$value->title);
-                array_push($d1,$value->N83);
-                array_push($d2,$value->N82);
-                array_push($d3,$value->N8);
-                array_push($d4,$value->N5);
-                array_push($d5,$value->N0);
-                array_push($d6,$value->N_5);
-                array_push($d7,$value->N_10);
-                array_push($d8,$value->N_15);
-                array_push($d9,$value->N_20);
-                array_push($d10,$value->N_25);
-            }
-           $operating_load->addRow($d1);
-           $operating_load->addRow($d2);
-           $operating_load->addRow($d3);
-           $operating_load->addRow($d4);
-           $operating_load->addRow($d5);
-           $operating_load->addRow($d6);
-           $operating_load->addRow($d7);
-           $operating_load->addRow($d8);
-           $operating_load->addRow($d9);
-           $operating_load->addRow($d10);
-       // }
+        $mod=HeatModel::whereIn("id",$request->ids)->get(); 
+        $data = array();
+        $titles=array();
+        $result=array();
+        foreach ($mod as $key => $value) {
+            array_push($data, array($value->x1,$value->x2,$value->x3,$value->x4,$value->x5,$value->x6,$value->x7,$value->x8,$value->x9));
+            array_push($titles,$value->title);
+        };
+        
         $w=array(1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9);
         $m=array(1,0,1,0,0,1,1,1,1); //minimisation or maximisation
         $temp=app('App\Http\Controllers\CalculationController')->topsis($data,$w,$m);
         asort($temp);
-        $bar = Lava::DataTable();
-        $bar->addStringColumn('Name')
-           ->addNumberColumn('Rank');
+        $bar[0]=['Name','Rank'];
+        $ind=1;
         foreach ($temp as $key => $value) {
-            $bar->addRow([$titles[$key],$value]);
+            $bar[$ind]=[$titles[$key],$value];
+            $ind++;
         }
-        return array('data1' => $operating_load->toJson(),'data2' => $bar->toJson());
-    
+        array_push($result, json_encode($bar));
+
+        foreach ($mod as $key => $value) {
+                array_push($result, json_encode(array(
+                    ['Operating Hours [h]',$value->title],
+                    [$value->h83,$value->N83],
+                    [$value->h82,$value->N82],
+                    [$value->h8,$value->N8],
+                    [$value->h5,$value->N5],
+                    [$value->h0,$value->N0],
+                    [$value->h_5,$value->N_5],
+                    [$value->h_10,$value->N_10],
+                    [$value->h_15,$value->N_15],
+                    [$value->h_20,$value->N_20],
+                    [$value->h_25,$value->N_25]))
+                );
+            };
+        return $result;
     }
 
 }
