@@ -67,44 +67,36 @@
 	</div>
 	<div  class ="row mt-1">
 		<div id="f1" class="col-md-6">
-			<label>Heating season</label>
 		</div>
 		<div id="f2" class="col-md-6">
-			<label>Heating load</label>
 		</div>
 	</div>
-	{{-- {!! Lava::lavajs() !!} --}}
-	
-	@linechart('temperature_vs_capacity', 'f1')
-	@linechart('operating_vs_load', 'f2')
 </div>
-
-
-
-
-
 
 <script type="text/javascript">
 	google.charts.load('current', {'packages':['corechart']});
-
 	function drawLineChart1(data) {
 		var options = {'title' :'Temperature vs Heat Capacity ',
-			'hAxis' :{'title' : 'Average outdoor temperature, [°C]'},
+			'continuous':0,
+			'hAxis.format':'#,###%',
+			'hAxis' :{'title' : 'Average outdoor temperature, [°C]','direction': 1},
             'vAxis' : {'title' : 'Heat Capacity, [MW]'}, 
             'legend' : {'position' : 'top', 'alignment':'end'}, 
             'height':300,
-            'series' : {0: {'type' : 'line','lineWidth':0,'pointSize':5}, 1 : {'type' : 'line','lineWidth':1,'pointSize':0 }}};
+            'series' : {0: {'type' : 'line','lineWidth':0,'pointSize':5}},
+            'explorer': {'maxZoomIn':4,'keepInBounds': true},
+            'trendlines': {0: {'type': 'linear','color': 'red','lineWidth': 1,'opacity': 1, 'showR2': true,'visibleInLegend': true}}
+        };
  		var chart = new google.visualization.LineChart(document.getElementById('f1'));
 		chart.draw(data, options);
 	}
 
 	function drawLineChart2(data) {
-		var options = {'title':'Operating Hours vs Heat Load', 'hAxis' : {'title' : 'Operating hours per year, [h]'},'vAxis' : {'title' : 'Heat Load, [MW]'}, 'legend' : {'position' : 'top', 'alignment':'end'}, 'lineWidth':1, 'pointSize':5, 'height':300, 'interpolateNulls': true,};
+		var options = {'title':'Operating Hours vs Heat Load', 'hAxis' : {'title' : 'Operating hours per year, [h]'},'vAxis' : {'title' : 'Heat Load, [MW]'}, 'legend' : {'position' : 'top', 'alignment':'end'}, 'lineWidth':1, 'pointSize':5, 'height':300, 'interpolateNulls': true,
+	};
  		var chart = new google.visualization.LineChart(document.getElementById('f2'));
 		chart.draw(data, options);
 	}
-
-
 
 	$(document).ready(function() {
     	$('#b1').click(function(){
@@ -119,17 +111,6 @@
 		    	 		drawLineChart1(d1);
 		    	 		drawLineChart2(d2);
 		    	 	}
-
-
-	  			 // 	console.log(dataTableJson);
-	  			 // 	       	lava.loadData('temperature_vs_capacity', dataTableJson.data1, function (chart) {
-	      //           		console.log('chart 1 loadData callback');
-	      //           		console.log(chart);
-	      //        	});
-	      //         	lava.loadData('operating_vs_load', dataTableJson.data2, function (chart) {
-	      //         		console.log('chart 2 loadData callback');
-	      //    		console.log(chart);
-	 	 			// });
   			 	}
   			});
   		});

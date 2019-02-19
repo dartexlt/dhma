@@ -2,6 +2,7 @@
 @section('title', 'Multicriteria Analysis 2 Method')
 @section('stylesheets')
 <link rel="stylesheet" href="/css/parsley.css">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 @endsection
 @section('content')
 <div class="container">
@@ -76,15 +77,25 @@
 	</div>
 	<div  class ="row mt-1">
 		<div id="f3" class="col-sm-6">
-			<label>Heating load</label>
 		</div>
 	</div>
 	{{-- {!! Lava::lavajs() !!} --}}
 	<div class="row mt-1" >
-	@linechart('operating_vs_load', 'f3')
 	</div>
 </div>
 <script type="text/javascript">
+	google.charts.load('current', {'packages':['corechart']});
+
+
+	function drawLineChart(data) {
+		var options = {'title':'Operating Hours vs Heat Load', 'hAxis' : {'title' : 'Operating hours per year, [h]'},'vAxis' : {'title' : 'Heat Load, [MW]'}, 'legend' : {'position' : 'top', 'alignment':'end'}, 'lineWidth':1, 'pointSize':5, 'height':300, 'interpolateNulls': true,
+		};
+ 		var chart = new google.visualization.LineChart(document.getElementById('f3'));
+		chart.draw(data, options);
+	}
+
+
+
 	$(document).ready(function() {
     	$('#b1').click(function(){
     		$.ajax({
@@ -92,7 +103,11 @@
     			url: "/Amet2",
     			data: $('#form2').serialize(),
     			success: function (dataTableJson) {
-  			 		lava.loadData('operating_vs_load', dataTableJson);
+  			 		if (dataTableJson!=null){
+  			 			console.log(dataTableJson.load);
+		    	 		var d1=google.visualization.arrayToDataTable($.parseJSON(dataTableJson.load));
+		    	 		drawLineChart(d1);
+		    	 	}
   			 	}
   			});
   		});

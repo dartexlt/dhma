@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Lava;
-use Khill\Lavacharts\Lavacharts;
 use App\Month;
 use App\HeatModel;
 use App\Country;
