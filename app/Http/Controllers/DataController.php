@@ -79,13 +79,6 @@ class DataController extends Controller
             $sumxx=0;
             $sumn=0;
             $Nhv=0; 
-            $temp_capacity = Lava::DataTable();
-            $operating_load = Lava::DataTable();
-            $temp_capacity->addNumberColumn('Average Outdoor Temperature C')
-               ->addNumberColumn('Heat Capacity [MW]')
-               ->addNumberColumn('Trend');
-            $operating_load->addNumberColumn('Operating Hours [h]')
-               ->addNumberColumn('Heat Load [MW]');
             foreach ($N as $key => $value) {
                 if ($heatingSeason[$key]==0){
                     $Nhv=$Nhv+$N[$key];
@@ -104,7 +97,6 @@ class DataController extends Controller
             foreach ($t as $key => $value) {
                 if ($heatingSeason[$key]==1){
                     $tt=$a*$t[$key]+$b;
-                    $temp_capacity->addRow([$t[$key], $N[$key],$tt]);
                 }             
             }
             $tfixed=array($request->fixedh8, $request->fixedh5, $request->fixedh0, $request->fixedh_5, $request->fixedh_10, $request->fixedh_15, $request->fixedh_20,$request->fixedh_25);
@@ -112,9 +104,7 @@ class DataController extends Controller
             foreach ($tfixed as $key => $value) {
                 $Nfixed[$key+2]=$a*$tfixed[$key]+$b;
             }
-            foreach ($hnr as $key => $value) {
-                $operating_load->addRow( [$hnr[$key],$Nfixed[$key]]);
-            }
+            
             $hm->nhv=$Nhv;
             $hm->a=$a;
             $hm->b=$b;
@@ -226,13 +216,6 @@ class DataController extends Controller
             foreach ($tfixed as $key => $value) {
                 $N2nr[$key+2]=$request->Nave*$knr[$key]+$request->N2hw+$request->Nl;
             }
-            $operating_load = Lava::DataTable();
-            $operating_load->addNumberColumn('Operating Hours [h]')
-               ->addNumberColumn('Heat Load [MW]');
-            foreach ($hnr as $key => $value) {
-                $operating_load->addRow( [$hnr[$key],$N2nr[$key]]);
-            }
-            Lava::LineChart('operating_vs_load', $operating_load, ['title' => 'Operating Hours vs Heat Load', 'hAxis' => ['title' => 'Operating hours per year, [h]'],'vAxis' => ['title' => 'Heat Load, [MW]'], 'legend' => ['position' => 'top', 'alignment'=>'end'], 'lineWidth'=>1, 'pointSize'=>5, 'height'=>300]);
             $hm->Nave=$request->Nave;
             $hm->N2hw=$request->N2hw;
             $hm->Nl=$request->Nl;
@@ -349,13 +332,6 @@ class DataController extends Controller
             $sumxx=0;
             $sumn=0;
             $Nhv=0; 
-            $temp_capacity = Lava::DataTable();
-            $operating_load = Lava::DataTable();
-            $temp_capacity->addNumberColumn('Average Outdoor Temperature C')
-               ->addNumberColumn('Heat Capacity [MW]')
-               ->addNumberColumn('Trend');
-            $operating_load->addNumberColumn('Operating Hours [h]')
-               ->addNumberColumn('Heat Load [MW]');
             foreach ($N as $key => $value) {
                 if ($heatingSeason[$key]==0){
                     $Nhv=$Nhv+$N[$key];
@@ -374,16 +350,12 @@ class DataController extends Controller
             foreach ($t as $key => $value) {
                 if ($heatingSeason[$key]==1){
                     $tt=$a*$t[$key]+$b;
-                    $temp_capacity->addRow([$t[$key], $N[$key],$tt]);
                 }             
             }
             $tfixed=array($request->fixedh8, $request->fixedh5, $request->fixedh0, $request->fixedh_5, $request->fixedh_10, $request->fixedh_15, $request->fixedh_20,$request->fixedh_25);
             $Nfixed=array($Nhv,$Nhv);
             foreach ($tfixed as $key => $value) {
                 $Nfixed[$key+2]=$a*$tfixed[$key]+$b;
-            }
-            foreach ($hnr as $key => $value) {
-                $operating_load->addRow( [$hnr[$key],$Nfixed[$key]]);
             }
             $hm->nhv=$Nhv;
             $hm->a=$a;
@@ -488,13 +460,6 @@ class DataController extends Controller
             foreach ($tfixed as $key => $value) {
                 $N2nr[$key+2]=$request->Nave*$knr[$key]+$request->N2hw+$request->Nl;
             }
-            $operating_load = Lava::DataTable();
-            $operating_load->addNumberColumn('Operating Hours [h]')
-               ->addNumberColumn('Heat Load [MW]');
-            foreach ($hnr as $key => $value) {
-                $operating_load->addRow( [$hnr[$key],$N2nr[$key]]);
-            }
-            Lava::LineChart('operating_vs_load', $operating_load, ['title' => 'Operating Hours vs Heat Load', 'hAxis' => ['title' => 'Operating hours per year, [h]'],'vAxis' => ['title' => 'Heat Load, [MW]'], 'legend' => ['position' => 'top', 'alignment'=>'end'], 'lineWidth'=>1, 'pointSize'=>5, 'height'=>300]);
             $hm->Nave=$request->Nave;
             $hm->N2hw=$request->N2hw;
             $hm->Nl=$request->Nl;
