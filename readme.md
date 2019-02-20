@@ -1,3 +1,11 @@
+## Install
+
+<p><font face="courier new">composer install</font></p>
+
+setup fresh DB:
+
+<p><font face="courier new">php artisan migrate:fresh --seed </font></p>
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">

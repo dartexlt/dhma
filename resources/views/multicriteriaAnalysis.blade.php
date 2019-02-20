@@ -102,6 +102,8 @@
 	google.charts.load('current', {'packages':['corechart']});
 
 	function drawLineChart(data) {
+		console.log(data);
+		data.sort([{column: 0, desc:true}]);
 		var options = {'title':'Operating Hours vs Heat Load', 'hAxis' : {'title' : 'Operating hours per year, [h]'},'vAxis' : {'title' : 'Heat Load, [MW]'}, 'legend' : {'position' : 'top', 'alignment':'end'}, 'lineWidth':1, 'pointSize':5, 'height':300, 'interpolateNulls': true,};
  		var chart = new google.visualization.LineChart(document.getElementById('LineChart'));
 		chart.draw(data, options);
