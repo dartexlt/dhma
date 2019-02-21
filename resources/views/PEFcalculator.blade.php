@@ -22,27 +22,28 @@
 							<label>Month</label>
 						</div>
 						<div class="col-sm-3">
-							<label>Consumed Heat [MWh]</label>
+							<label>Consumed heat [MWh]</label>
 						</div>
 						<div class="col-sm-3">
-							<label>Transferred Heat to Network [MWh]</label>
+							<label>Fuel input to the HP and CHP [MWh]</label>
 						</div>
 						<div class="col-sm-3">
-							<label>Hours [h]</label>
+							<label>Electricity production of the cogeneration plants [MWh]</label>
 						</div>
+						
 					</div>
-					@include('forms.inputForm3Method',['month' => 'January', 'Q'=>'1207.59','Q2'=>'1132.85','h'=>'744'])
-					@include('forms.inputForm3Method',['month' => 'February', 'Q'=>'1325.19','Q2'=>'1208.06','h'=>'672'])
-					@include('forms.inputForm3Method',['month' => 'March', 'Q'=>'1022.45','Q2'=>'914.68','h'=>'744'])
-					@include('forms.inputForm3Method',['month' => 'April', 'Q'=>'459.78','Q2'=>'391.74','h'=>'720'])
-					@include('forms.inputForm3Method',['month' => 'May', 'Q'=>'118.10','Q2'=>'102.57','h'=>'744'])
-					@include('forms.inputForm3Method',['month' => 'June', 'Q'=>'93.50','Q2'=>'80.06','h'=>'720'])
-					@include('forms.inputForm3Method',['month' => 'July', 'Q'=>'86.72','Q2'=>'73.29','h'=>'744'])
-					@include('forms.inputForm3Method',['month' => 'August', 'Q'=>'94.03','Q2'=>'81.55','h'=>'744'])
-					@include('forms.inputForm3Method',['month' => 'September', 'Q'=>'102.30','Q2'=>'88.94','h'=>'720'])
-					@include('forms.inputForm3Method',['month' => 'October', 'Q'=>'402.98','Q2'=>'349.19','h'=>'744'])
-					@include('forms.inputForm3Method',['month' => 'November', 'Q'=>'755.45','Q2'=>'666.42','h'=>'720'])
-					@include('forms.inputForm3Method',['month' => 'December', 'Q'=>'989.79','Q2'=>'931.60','h'=>'744'])
+					@include('forms.PEFinputForm',['month' => 'January', 'QF'=>'1509.49','Q2'=>'1132.85','W'=>'120'])
+					@include('forms.PEFinputForm',['month' => 'February', 'QF'=>'1656.49','Q2'=>'1208.06','W'=>'125'])
+					@include('forms.PEFinputForm',['month' => 'March', 'QF'=>'1278.06','Q2'=>'914.68','W'=>'130'])
+					@include('forms.PEFinputForm',['month' => 'April', 'QF'=>'574.73','Q2'=>'391.74','W'=>'140'])
+					@include('forms.PEFinputForm',['month' => 'May', 'QF'=>'147.63','Q2'=>'102.57','W'=>'180'])
+					@include('forms.PEFinputForm',['month' => 'June', 'QF'=>'116.88','Q2'=>'80.06','W'=>'200'])
+					@include('forms.PEFinputForm',['month' => 'July', 'QF'=>'108.40','Q2'=>'73.29','W'=>'70'])
+					@include('forms.PEFinputForm',['month' => 'August', 'QF'=>'117.54','Q2'=>'81.55','W'=>'75'])
+					@include('forms.PEFinputForm',['month' => 'September', 'QF'=>'127.88','Q2'=>'88.94','W'=>'80'])
+					@include('forms.PEFinputForm',['month' => 'October', 'QF'=>'503.73','Q2'=>'349.19','W'=>'90'])
+					@include('forms.PEFinputForm',['month' => 'November', 'QF'=>'944.31','Q2'=>'666.42','W'=>'75'])
+					@include('forms.PEFinputForm',['month' => 'December', 'QF'=>'1237.24','Q2'=>'931.60','W'=>'120'])
 				</div>
 			</div>
         </div>
