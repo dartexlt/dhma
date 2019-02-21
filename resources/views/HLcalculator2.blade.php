@@ -6,10 +6,17 @@
 @endsection
 @section('content')
 <div class="container">
+	<div class ="row mt-3">
+		<div class="col-sm-12 text-center">
+			<h2><b>
+				Heat Load Calculator
+			</b></h2>
+		</div>
+	</div>
 	<form method="post" id="form2"  data-parsley-validate>
 		@csrf
 		<div class="form-group">
-			<div class ="row">
+			<div class ="row mt-5">
 				<div class="col-sm-7">
 					<div class ="row mt-1">
 						<div class="col-sm-8">
@@ -100,7 +107,7 @@
     	$('#b1').click(function(){
     		$.ajax({
     			type: "POST",
-    			url: "/Amet2",
+    			url: "HL2",
     			data: $('#form2').serialize(),
     			success: function (dataTableJson) {
   			 		if (dataTableJson!=null){

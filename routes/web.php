@@ -12,24 +12,21 @@
 */
 
 Route::get('/', 'PagesController@getIndex');
-Route::get('/ma1', 'PagesController@getMA1');
-Route::get('/ma2', 'PagesController@getMA2');
-Route::get('/ma3', 'PagesController@getMA3');
+Route::get('/HLcalculator1', 'PagesController@getHeatLoad1');
+Route::get('/HLcalculator2', 'PagesController@getHeatLoad2');
+Route::get('/RiLcalculator', 'PagesController@getRiL');
+Route::get('/PEFcalculator', 'PagesController@getPEF');
 Route::get('/model', 'PagesController@getModel');
 Route::get('/crud', 'PagesController@getCrud')->name('crud');
 Route::resource('data', 'DataController');
-Route::post('calc', 'CalculationController@calculate')->name('calc.compute');
-Route::post('calc2', 'CalculationController@calculate2')->name('calc.compute2');
-Route::post('calc3', 'CalculationController@calculate3')->name('calc.compute3');
-Route::post('calcMA', 'CalculationController@calculateMA')->name('calc.computeMA');
-Route::get('result/{data_array}', 'CalculationController@getResult')->name('calc.result');
+Route::post('HL1', 'CalculationController@calcHL1')->name('calc.HL1');
+Route::post('HL2', 'CalculationController@calcHL2')->name('calc.HL2');
+Route::post('RiL', 'CalculationController@calcRiL')->name('calc.RiL');
+// Route::get('result/{data_array}', 'CalculationController@getResult')->name('calc.result');
 
 Route::get('search','DataController@search');
 Route::get('getAnalysisData', 'DataController@getCharts');
 
-
-Route::post('/Amet1', 'CalculationController@calculate');
-Route::post('/Amet2', 'CalculationController@calculate2');
 
 Route::get('dropdownlist','DropdownController@index');
 Route::get('get-state-list','DropdownController@getStateList');

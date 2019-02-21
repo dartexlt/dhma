@@ -19,7 +19,7 @@ class CalculationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function calculate(Request $request)
+    public function calcHL1(Request $request)
     {
        $this->validate($request, array('QJanuary'=>'required|numeric','hJanuary'=>'required|numeric','tJanuary'=>'required|numeric','QFebruary'=>'required|numeric','hFebruary'=>'required|numeric','tFebruary'=>'required|numeric','QMarch'=>'required|numeric','hMarch'=>'required|numeric','tMarch'=>'required|numeric','QApril'=>'required|numeric','hApril'=>'required|numeric','tApril'=>'required|numeric','QMay'=>'required|numeric','hMay'=>'required|numeric','tMay'=>'required|numeric','QJune'=>'required|numeric','hJune'=>'required|numeric','tJune'=>'required|numeric','QJuly'=>'required|numeric','hJuly'=>'required|numeric','tJuly'=>'required|numeric','QAugust'=>'required|numeric','hAugust'=>'required|numeric','tAugust'=>'required|numeric','QSeptember'=>'required|numeric','hSeptember'=>'required|numeric','tSeptember'=>'required|numeric','QOctober'=>'required|numeric','hOctober'=>'required|numeric','tOctober'=>'required|numeric','QNovember'=>'required|numeric','hNovember'=>'required|numeric','tNovember'=>'required|numeric','QDecember'=>'required|numeric','hDecember'=>'required|numeric','tDecember'=>'required|numeric','fixedh8'=>'required|numeric','fixedh5'=>'required|numeric','fixedh0'=>'required|numeric','fixedh_5'=>'required|numeric','fixedh_10'=>'required|numeric','fixedh_15'=>'required|numeric','fixedh_20'=>'required|numeric','fixedh_25'=>'required|numeric'));
         $Q=array($request->QJanuary,$request->QFebruary,$request->QMarch,$request->QApril, $request->QMay, $request->QJune, $request->QJuly, $request->QAugust, $request->QSeptember, $request->QOctober, $request->QNovember, $request->QDecember);
@@ -94,7 +94,7 @@ class CalculationController extends Controller
     }
 
 
- public function calculate2(Request $request)
+ public function calcHL2(Request $request)
     {
        $this->validate($request, array('Nave'=>'required|numeric','N2hw'=>'required|numeric','Nl'=>'required|numeric','tao'=>'required|numeric','tar'=>'required|numeric','h83'=>'required|numeric','h82'=>'required|numeric','h8'=>'required|numeric','h5'=>'required|numeric','h0'=>'required|numeric','h_5'=>'required|numeric','h_10'=>'required|numeric','h_15'=>'required|numeric','h_20'=>'required|numeric','h_25'=>'required|numeric','fixedh8'=>'required|numeric','fixedh5'=>'required|numeric','fixedh0'=>'required|numeric','fixedh_5'=>'required|numeric','fixedh_10'=>'required|numeric','fixedh_15'=>'required|numeric','fixedh_20'=>'required|numeric','fixedh_25'=>'required|numeric'));
         $hnr= array($request->h83, $request->h82, $request->h8, $request->h5, $request->h0, $request->h_5, $request->h_10, $request->h_15, $request->h_20, $request->h_25);
@@ -121,7 +121,7 @@ class CalculationController extends Controller
     }
    
 
-public function calculate3(Request $request)
+public function calcRiL(Request $request)
     {
        $this->validate($request, array());
         $Q=array($request->QJanuary,$request->QFebruary,$request->QMarch,$request->QApril, $request->QMay, $request->QJune, $request->QJuly, $request->QAugust, $request->QSeptember, $request->QOctober, $request->QNovember, $request->QDecember);
@@ -138,123 +138,13 @@ public function calculate3(Request $request)
             $Eloss=$Eloss+$Q3[$key];
         }
         $Eaux=15;
-        $Ril=$this->RiL($Eloss,$Eaux,$Edel);
+        $Ril=($Eloss+$Eaux)/$Edel;
+        return json_encode($Ril);
        //  return view('calc.testResult',compact('Ril'));
       // return view('calc.result2');
       
     }
-
-
-public function calculateMA(Request $request)
-    {
-        //Multicriteria Analysis
-        //test array
-        $data = array
-            (
-            array(1.278,0.44,90.00,0.00,0.00,150.01,0.34,15.30,41),
-            array(1.353,0.44,90.00,100.00,0.00,150.01,0.00,15.30,20),
-            array(1.082,0.44,90.00,100.00,0.00,150.01,0.00,15.30,10),
-            array(1.268,0.51,90.00,0.00,0.00,141.01,0.33,17.32,40),
-            array(1.342,0.51,90.00,100.00,0.00,141.01,0.00,17.32,20)//,
-            // array(1.074,0.51,90.00,100.00,0.00,141.01,0.00,17.32,10),
-            // array(1.203,0.60,90.00,0.00,0.00,83.01,0.32,23.09,40),
-            // array(1.274,0.60,90.00,100.00,0.00,83.01,0.00,23.09,20),
-            // array(1.019,0.60,90.00,100.00,0.00,83.01,0.00,23.09,10),
-            // array(1.358,0.44,60.00,0.00,1.00,222.11,0.36,12.70,40),
-            // array(1.438,0.44,58.00,100.00,1.00,222.11,0.00,12.70,20),
-            // array(1.150,0.44,58.00,100.00,1.00,222.11,0.00,12.70,10),
-            // array(1.343,0.51,56.00,0.00,1.00,208.78,0.35,14.43,40),
-            // array(1.422,0.51,56.00,100.00,1.00,208.78,0.00,14.43,20),
-            // array(1.138,0.51,56.00,100.00,1.00,208.78,0.00,14.43,10),
-            // array(1.248,0.60,55.00,0.00,1.00,122.90,0.33,20.21,40),
-            // array(1.321,0.60,55.00,100.00,1.00,122.90,0.00,20.21,20),
-            // array(1.057,0.60,55.00,100.00,1.00,122.90,0.00,20.21,10)
-        );
-        $w=array(1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9);
-        $m=array(1,0,1,0,0,1,1,1,1); //minimisation or maximisation
-        $temp=$this->topsis($data,$w,$m);
-        asort($temp);
-
-        $bar = Lava::DataTable();
-        $bar->addStringColumn('Name')
-           ->addNumberColumn('Rank');
-        foreach ($temp as $key => $value) {
-            $bar->addRow([$key+1,$value]);
-        }
-        Lava::ColumnChart('multicriteria', $bar, ['title' => 'Multicriteria ranking', 'hAxis' => ['title' => 'Region'],'vAxis' => ['title' => 'Rank'], 'height'=>800]);
-        return view('calc.testResult');
-      
-    }
-
-
-    public function topsis($matrix, $criteriaWeights,$maximisation)
-    {
-        $row=count($matrix);
-        $col = count($matrix[0]);
-        if (($row>1)&&($col>1)&& (count($criteriaWeights)==$col)&& (count($maximisation)==$col)){
-            $min=array();
-            $max=array();   
-            for ($c = 0; $c < $col; $c++) {
-                $min[$c]=min(array_column($matrix, $c));
-                $max[$c]=max(array_column($matrix, $c));
-            }
-            // matrix normalization and weighting
-            for ($r= 0; $r< $row; $r++) {
-                for ($c = 0; $c < $col; $c++) {
-                    $division=0;
-                    if (($max[$c]-$min[$c])==0){
-                        $division=1;
-                    }
-                    else{
-                        $division=$max[$c]-$min[$c];
-                    }
-                    if ($maximisation[$c]==1){
-                        $matrix[$r][$c]=(($max[$c]-$matrix[$r][$c])/$division)*$criteriaWeights[$c];
-                    }
-                    else{
-                        $matrix[$r][$c]=(($matrix[$r][$c]-$min[$c])/$division)*$criteriaWeights[$c];   
-                    }
-                }
-            } 
-            for ($c = 0; $c < $col; $c++) {
-                $min[$c]=min(array_column($matrix, $c));
-                $max[$c]=max(array_column($matrix, $c));
-            }
-            $splus=array();
-            $sminus=array();
-            for ($r= 0; $r< $row; $r++) {
-                $splus[$r]=0;
-                $sminus[$r]=0;
-                for ($c = 0; $c < $col; $c++) {
-                        $splus[$r]=$splus[$r]+pow($matrix[$r][$c]-$max[$c],2);
-                        $sminus[$r]=$sminus[$r]+pow($matrix[$r][$c]-$min[$c],2);   
-                }
-                $splus[$r]=sqrt($splus[$r]);
-                $sminus[$r]=sqrt($sminus[$r]);
-            }
-            $C=array();
-      
-            for ($r = 0; $r < $row; $r++) {    
-                $division=0;
-                if (($sminus[$r]+$splus[$r])==0){
-                    $division=1;
-                }
-                else{
-                    $division=$sminus[$r]+$splus[$r];
-                }
-                $C[$r]=$sminus[$r]/$division;
-            }
-            return $C;
-        }
-    }
-      
-    public function RiL($Eloss, $Eaux, $Edel)
-    {
-        $Ril=($Eloss+$Eaux)/$Edel;
-        return $Ril;   
-    }
-
-    
+ 
 /**
      * Display the specified resource.
      *

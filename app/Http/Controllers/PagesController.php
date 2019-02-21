@@ -10,14 +10,17 @@ use App\City;
 
 class PagesController extends Controller
 {
-    public function getMA1(){
-    	return view('MA1');
+    public function getHeatLoad1(){
+    	return view('HLcalculator1');
     }
-     public function getMA2(){
-        return view('MA2');
+     public function getHeatLoad2(){
+        return view('HLcalculator2');
     }
-     public function getMA3(){
-    	return view('MA3');
+     public function getRiL(){
+    	return view('RiLcalculator');
+    }
+    public function getPEF(){
+        return view('PEFcalculator');
     }
 
     public function getModel(){

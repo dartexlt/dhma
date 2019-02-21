@@ -566,7 +566,7 @@ class DataController extends Controller
         
         $w=array(1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9);
         $m=array(1,0,1,0,0,1,1,1,1); //minimisation or maximisation
-        $temp=app('App\Http\Controllers\CalculationController')->topsis($data,$w,$m);
+        $temp=$this->topsis($data,$w,$m);
         asort($temp);
         $bar[0]=['Name','Rank'];
         $ind=1;
@@ -593,5 +593,70 @@ class DataController extends Controller
             };
         return $result;
     }
+
+
+
+    public function topsis($matrix, $criteriaWeights,$maximisation)
+    {
+        $row=count($matrix);
+        $col = count($matrix[0]);
+        if (($row>1)&&($col>1)&& (count($criteriaWeights)==$col)&& (count($maximisation)==$col)){
+            $min=array();
+            $max=array();   
+            for ($c = 0; $c < $col; $c++) {
+                $min[$c]=min(array_column($matrix, $c));
+                $max[$c]=max(array_column($matrix, $c));
+            }
+            // matrix normalization and weighting
+            for ($r= 0; $r< $row; $r++) {
+                for ($c = 0; $c < $col; $c++) {
+                    $division=0;
+                    if (($max[$c]-$min[$c])==0){
+                        $division=1;
+                    }
+                    else{
+                        $division=$max[$c]-$min[$c];
+                    }
+                    if ($maximisation[$c]==1){
+                        $matrix[$r][$c]=(($max[$c]-$matrix[$r][$c])/$division)*$criteriaWeights[$c];
+                    }
+                    else{
+                        $matrix[$r][$c]=(($matrix[$r][$c]-$min[$c])/$division)*$criteriaWeights[$c];   
+                    }
+                }
+            } 
+            for ($c = 0; $c < $col; $c++) {
+                $min[$c]=min(array_column($matrix, $c));
+                $max[$c]=max(array_column($matrix, $c));
+            }
+            $splus=array();
+            $sminus=array();
+            for ($r= 0; $r< $row; $r++) {
+                $splus[$r]=0;
+                $sminus[$r]=0;
+                for ($c = 0; $c < $col; $c++) {
+                        $splus[$r]=$splus[$r]+pow($matrix[$r][$c]-$max[$c],2);
+                        $sminus[$r]=$sminus[$r]+pow($matrix[$r][$c]-$min[$c],2);   
+                }
+                $splus[$r]=sqrt($splus[$r]);
+                $sminus[$r]=sqrt($sminus[$r]);
+            }
+            $C=array();
+      
+            for ($r = 0; $r < $row; $r++) {    
+                $division=0;
+                if (($sminus[$r]+$splus[$r])==0){
+                    $division=1;
+                }
+                else{
+                    $division=$sminus[$r]+$splus[$r];
+                }
+                $C[$r]=$sminus[$r]/$division;
+            }
+            return $C;
+        }
+    }
+      
+   
 
 }

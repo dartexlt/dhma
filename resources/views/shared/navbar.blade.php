@@ -10,20 +10,26 @@
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Multicriteria Analysis
+            <a class="nav-link dropdown-toggle" href="/" id="calculatorsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Calculation Tools
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/ma1">Heat Load Calculator 1</a>
-              <a class="dropdown-item" href="/ma2">Heat Load Calculator 2</a>
-              {{-- <a class="dropdown-item" href="/ma3">3 Method</a> --}}
-              <a class="dropdown-item" href="/model" method="post">Create District Model</a>
+              <a class="dropdown-item" href="/HLcalculator1">Heat Load Calculator 1</a>
+              <a class="dropdown-item" href="/HLcalculator2">Heat Load Calculator 2</a>
+              <a class="dropdown-item" href="/RiLcalculator">RiL Calculator</a>
+              <a class="dropdown-item" href="/PEFcalculator">PEF Calculator</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/" id="DBDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Region Related Data
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/model">Create District Model</a>
+              <a class="dropdown-item" href="/crud">Edit Models</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href={{route('data.index')}} method="get">Multicriteria Analysis</a>
             </div>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link contacts" href="/crud">Edit Models</a>
         </li>
         <li class="nav-item">
         <a class="nav-link contacts" href="/">About</a>
