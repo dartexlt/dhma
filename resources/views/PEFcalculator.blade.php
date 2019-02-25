@@ -16,7 +16,7 @@
 		<div class="form-group">
 			@csrf
 			<div class ="row mt-5">
-				<div class="col-sm-8 offset-2">
+				<div class="col-sm-8">
 					<div class="row mt-1">
 						<div class="col-sm-2">
 							<label>Month</label>
@@ -45,15 +45,93 @@
 					@include('forms.PEFinputForm',['month' => 'November', 'QF'=>'944.31','Q2'=>'666.42','W'=>'75'])
 					@include('forms.PEFinputForm',['month' => 'December', 'QF'=>'1237.24','Q2'=>'931.60','W'=>'120'])
 				</div>
+			
+				<div class="col-sm-4">
+					<div class="row mt-1">
+						<div class="col-sm-2">
+						</div>
+						<div class="col-sm-5">
+							<label>Fuel</label>
+						</div>
+						<div class="col-sm-5">
+							<label>Primary Resource Factor</label>
+						</div>						
+					</div>
+					
+					<div class="form-row mt-1" >
+						<div class="col-sm-8">
+							<input type="radio" name="prf" value="Lignite_coal" checked> Lignite coal
+						</div>
+						<div class="col-sm-4">
+							<input type="number" step="0.0001" class="form-control form-control-sm" name="Lignite_coal" placeholder="" value="1.3" required data-parsley-type="number">
+						</div>
+					</div>
+					<div class="form-row mt-1" >
+						<div class="col-sm-8">
+							<input type="radio" name="prf" value="Hard_coal"> Hard coal
+						</div>
+						<div class="col-sm-4">
+							<input type="number" step="0.0001" class="form-control form-control-sm" name="Hard_coal" placeholder="" value="1.2" required data-parsley-type="number">
+						</div>
+					</div>
+					<div class="form-row mt-1" >
+						<div class="col-sm-8">
+							<input type="radio" name="prf" value="Oil"> Oil
+						</div>
+						<div class="col-sm-4">
+							<input type="number" step="0.0001" class="form-control form-control-sm" name="Oil" placeholder="" value="1.1" required data-parsley-type="number">
+						</div>
+					</div>
+					<div class="form-row mt-1" >
+						<div class="col-sm-8">
+							<input type="radio" name="prf" value="Natural_gas"> Natural gas
+						</div>
+						<div class="col-sm-4">
+							<input type="number" step="0.0001" class="form-control form-control-sm" name="Natural_gas" placeholder="" value="1.1" required data-parsley-type="number">
+						</div>
+					</div>
+					<div class="form-row mt-1" >
+						<div class="col-sm-8">
+							<input type="radio" name="prf" value="Excess_heat"> Excess heat e.g. from industrial proc.
+						</div>
+						<div class="col-sm-4">
+							<input type="number" step="0.0001" class="form-control form-control-sm" name="Excess_heat" placeholder="" value="0.05" required data-parsley-type="number">
+						</div>
+					</div>
+					<div class="form-row mt-1" >
+						<div class="col-sm-8">
+							<input type="radio" name="prf" value="Regenerative_energies"> Regenerative Energies (e.g. Wood)
+						</div>
+						<div class="col-sm-4">
+							<input type="number" step="0.0001" class="form-control form-control-sm" name="Regenerative_energies" placeholder="" value="0.1" required data-parsley-type="number">
+						</div>
+					</div>					
+					<div class="form-row mt-1" >
+						<div class="col-sm-8">
+							<input type="radio" name="prf" value="Waste_fuel"> Waste as Fuel, Landfill Gas
+						</div>
+						<div class="col-sm-4">
+							<input type="number" step="0.0001" class="form-control form-control-sm" name="Waste_fuel" placeholder="" value="0" required data-parsley-type="number">
+						</div>
+					</div>					
+					<div class="form-row mt-1" >
+						<div class="col-sm-8">
+							<input type="radio" name="prf" value="Electrical_power"> Electrical Power, European Average
+						</div>
+						<div class="col-sm-4">
+							<input type="number" step="0.0001" class="form-control form-control-sm" name="Electrical_power" placeholder="" value="2.5" required data-parsley-type="number">
+						</div>
+					</div>
+				</div>
 			</div>
-        </div>
+		</div>
     </form>
 	<div class="row" >
-		<div class="col-sm-1 offset-2">
+		<div class="col-sm-1 ">
         	<button type="submit" id="calculate"class="btn btn-primary btn-md">Calculate</button>
     	</div>
     	<h5><b>
-	    	<div id="ril" class="col-sm-12">
+	    	<div id="pef" class="col-sm-12">
 
 	    	</div>
     	</b></h5>
@@ -67,7 +145,7 @@
     			url: "PEF",
     			data: $('#form').serialize(),
     			success: function (dataTableJson) {
-					$('#ril').text("Relative importance of losses (RiL): "+ dataTableJson);
+					$('#pef').text("Primary energy factor (PEF): "+ dataTableJson);
   			 	}
   			});
   		});

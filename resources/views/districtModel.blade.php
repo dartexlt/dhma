@@ -102,6 +102,22 @@
 					</div>
 					<div class ="row mt-1">
 						<div class="col-sm-8">
+							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">The relative importance of losses (RiL)</label>
+						</div>
+						<div class="col-sm-4">
+							<input type="number" step="0.0001" class="form-control form-control-sm" name=ril  data-parsley-type="number">
+						</div>																	
+					</div>
+					<div class ="row mt-1">
+						<div class="col-sm-8">
+							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Primary energy factor (PEF)</label>
+						</div>
+						<div class="col-sm-4">
+							<input type="number" step="0.0001" class="form-control form-control-sm" name=pef  data-parsley-type="number">
+						</div>																	
+					</div>
+					<div class ="row mt-1">
+						<div class="col-sm-8">
 							<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Specific fuel consumption [MWh/MWh]</label>
 						</div>
 						<div class="col-sm-4">

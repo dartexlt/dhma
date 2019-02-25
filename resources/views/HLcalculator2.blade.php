@@ -58,6 +58,11 @@
 							<input type="number" step="0.0001" class="form-control form-control-sm" name=tar placeholder="" value=18 equired data-parsley-type="number">
 						</div>																	
 					</div>
+
+					<div class ="row mt-1" id="f3">
+																			
+					</div>
+
 				</div>
 				<div class="col-sm-5">
 					<div class="row mt-2">
@@ -81,13 +86,6 @@
 	</form>
 	<div class="row mt-1" >
         <button id="b1" type="submit" class="btn btn-primary btn-md">Calculate</button>
-	</div>
-	<div  class ="row mt-1">
-		<div id="f3" class="col-sm-6">
-		</div>
-	</div>
-	{{-- {!! Lava::lavajs() !!} --}}
-	<div class="row mt-1" >
 	</div>
 </div>
 <script type="text/javascript">

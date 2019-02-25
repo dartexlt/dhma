@@ -16,23 +16,4 @@
 			</ul>
 		</div>
 	@endif
-	{{-- <h1> {{$Nhv}}</h1>
-	<h1> {{$a}}</h1>
-	<h1> {{$b}}</h1>
-	@foreach ($Nfixed as $T)
-    	<h1>{{$T}}</h1>
-	@endforeach
-	 --}}
-	 		<div  class ="row">
-				<div id="f1" class="col-md-4">
-					<label>Heating season</label>
-				</div>
-				<div id="f2" class="col-md-4">
-					<label>Heating load</label>
-				</div>
-			</div>
-
-	@linechart('temperature_vs_capacity', 'f1')
-	@linechart('operating_vs_load', 'f2')
-
 @endsection

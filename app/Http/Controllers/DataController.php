@@ -252,8 +252,10 @@ class DataController extends Controller
             $hm->save();
             Session::flash('success','Data successfully saved');  
         }
-        $validator = \Validator::make($request->all(), array('title'=>'required', 'x1'=>'required|numeric','x2'=>'required|numeric','x3'=>'required|numeric','x4'=>'required|numeric','x5'=>'required|numeric','x6'=>'required|numeric','x7'=>'required|numeric','x8'=>'required|numeric','x9'=>'required|numeric'));
+        $validator = \Validator::make($request->all(), array('title'=>'required'));
         if ($validator->passes()){
+            $hm->ril=$request->ril;
+            $hm->pef=$request->pef;
             $hm->x1=$request->x1;
             $hm->x2=$request->x2;
             $hm->x3=$request->x3;
@@ -266,7 +268,7 @@ class DataController extends Controller
             $hm->save();
             Session::flash('success','Data successfully saved');  
         }
-        return view('calc.result2');
+        return view('calc.result');
        
     }
 
@@ -276,11 +278,6 @@ class DataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $model= HeatModel::find($id);
-        return view('result')->withModel($model);
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -446,7 +443,6 @@ class DataController extends Controller
             $month->december=$heatingSeason[11];
             $month->save();
             Session::flash('success','Data successfully updated');
-            // return view('calc.result');
         }
         $validator = \Validator::make($request->all(), array('title'=>'required', 'Nave'=>'required|numeric','N2hw'=>'required|numeric','Nl'=>'required|numeric','tao'=>'required|numeric','tar'=>'required|numeric','h83'=>'required|numeric','h82'=>'required|numeric','h8'=>'required|numeric','h5'=>'required|numeric','h0'=>'required|numeric','h_5'=>'required|numeric','h_10'=>'required|numeric','h_15'=>'required|numeric','h_20'=>'required|numeric','h_25'=>'required|numeric','fixedh8'=>'required|numeric','fixedh5'=>'required|numeric','fixedh0'=>'required|numeric','fixedh_5'=>'required|numeric','fixedh_10'=>'required|numeric','fixedh_15'=>'required|numeric','fixedh_20'=>'required|numeric','fixedh_25'=>'required|numeric'));
         if ($validator->passes()){
@@ -496,9 +492,10 @@ class DataController extends Controller
             $hm->save();
             Session::flash('success','Data successfully updated');  
         }
-        $validator = \Validator::make($request->all(), array('title'=>'required', 'x1'=>'required|numeric','x2'=>'required|numeric','x3'=>'required|numeric','x4'=>'required|numeric','x5'=>'required|numeric','x6'=>'required|numeric','x7'=>'required|numeric','x8'=>'required|numeric','x9'=>'required|numeric'));
+        $validator = \Validator::make($request->all(), array('title'=>'required'));
         if ($validator->passes()){
-            
+            $hm->ril=$request->ril;
+            $hm->pef=$request->pef;
             $hm->x1=$request->x1;
             $hm->x2=$request->x2;
             $hm->x3=$request->x3;
@@ -529,7 +526,7 @@ class DataController extends Controller
         return redirect()->route('crud');
         
     }
-    public function search(Request $request)
+    public function getRegion(Request $request)
     {
         if($request->ajax()){
             $output="";
@@ -550,7 +547,6 @@ class DataController extends Controller
                 }
             }
             return response()->json($mod);
-        
         }
     } 
     public function getCharts(Request $request)
@@ -559,9 +555,16 @@ class DataController extends Controller
         $data = array();
         $titles=array();
         $result=array();
+        $ril[0]=['Name','RiL'];
+        $pef[0]=['Name','PEF'];
+        $ind=1;
         foreach ($mod as $key => $value) {
             array_push($data, array($value->x1,$value->x2,$value->x3,$value->x4,$value->x5,$value->x6,$value->x7,$value->x8,$value->x9));
             array_push($titles,$value->title);
+            $ril[$ind]=[$value->title,$value->ril];
+            $pef[$ind]=[$value->title,$value->pef];
+
+            $ind++;
         };
         
         $w=array(1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9);
@@ -574,7 +577,7 @@ class DataController extends Controller
             $bar[$ind]=[$titles[$key],$value];
             $ind++;
         }
-        array_push($result, json_encode($bar));
+        // array_push($result, json_encode($bar));
 
         foreach ($mod as $key => $value) {
                 array_push($result, json_encode(array(
@@ -591,7 +594,8 @@ class DataController extends Controller
                     [$value->h_25,$value->N_25]))
                 );
             };
-        return $result;
+       
+         return array('barMA' => json_encode($bar),'barRil' => json_encode($ril),'barPef' => json_encode($pef), 'load' => json_encode($result));
     }
 
 

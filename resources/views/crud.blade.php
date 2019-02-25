@@ -250,7 +250,21 @@
 </style>
 @endsection
 @section('content')
-
+@if (Session::has('success'))
+		<div class="alert alert-success" role="alert">
+			<strong> Success: </strong>{{Session::get('success')}}
+		</div>
+	@endif
+	@if (count($errors)>0)
+		<div class="alert alert-danger" role="alert">
+			<strong> Errors: </strong>
+			<ul>
+				@foreach ($errors->all() as $error)
+					<li>{{$error}}</li>
+				@endforeach
+			</ul>
+		</div>
+	@endif
 
 <div class="container">
     <div class="table-wrapper">
@@ -386,6 +400,22 @@
 							</div>
 							<div class ="row mt-1">
 								<div class="col-sm-8">
+									<label for=tar class="col-sm-12 col-form-label col-form-label-sm">The relative importance of losses (RiL)</label>
+								</div>
+								<div class="col-sm-4">
+									<input type="number" step="0.0001" class="form-control form-control-sm" name=ril  data-parsley-type="number">
+								</div>																	
+							</div>
+							<div class ="row mt-1">
+								<div class="col-sm-8">
+									<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Primary energy factor (PEF)</label>
+								</div>
+								<div class="col-sm-4">
+									<input type="number" step="0.0001" class="form-control form-control-sm" name=pef  data-parsley-type="number">
+								</div>																	
+							</div>
+							<div class ="row mt-1">
+								<div class="col-sm-8">
 									<label for=tar class="col-sm-12 col-form-label col-form-label-sm">Specific fuel consumption [MWh/MWh]</label>
 								</div>
 								<div class="col-sm-4">
@@ -497,7 +527,7 @@
 	$(window).on( "load", function() {
 		$.ajax({
     		type : "GET",
-			url : "{{URL::to('search')}}",
+			url : "{{URL::to('region')}}",
 			data:{"all":0},
  			success:function(data){
  				datajson=data;
@@ -650,6 +680,8 @@
 		$("input[name='Nl']" ).val(datajson[i].Nl);
 		$("input[name='tao']" ).val(datajson[i].tao);
 		$("input[name='tar']" ).val(datajson[i].tar);
+		$("input[name='ril']" ).val(datajson[i].ril);
+		$("input[name='pef']" ).val(datajson[i].pef);
 		$("input[name='x1']" ).val(datajson[i].x1);
 		$("input[name='x2']" ).val(datajson[i].x2);
 		$("input[name='x3']" ).val(datajson[i].x3);
@@ -675,7 +707,7 @@
 	    if(countryID){
 	    	$.ajax({
 	    		type : "GET",
-				url : "{{URL::to('search')}}",
+				url : "{{URL::to('region')}}",
 				data:{"country":countryID},
 	 			success:function(data){
 	 				datajson=data;
@@ -694,7 +726,7 @@
 	    if(stateID){
 	        $.ajax({
 				type : "GET",
-				url : "{{URL::to('search')}}",
+				url : "{{URL::to('region')}}",
 				data:{"country":$('#country').val(), "state":stateID},
 	 			success:function(data){
 	 				datajson=data;
@@ -714,7 +746,7 @@
 	    if(cityID){
 	        $.ajax({
 				type : "GET",
-				url : "{{URL::to('search')}}",
+				url : "{{URL::to('region')}}",
 				data:{"country":$('#country').val(),"state":$('#state').val(), "city":cityID},
 	 			success:function(data){
 	 				datajson=data;

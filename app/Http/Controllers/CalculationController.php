@@ -140,18 +140,29 @@ public function calcRiL(Request $request)
         $Eaux=15;
         $Ril=($Eloss+$Eaux)/$Edel;
         return json_encode($Ril);
-       //  return view('calc.testResult',compact('Ril'));
-      // return view('calc.result2');
-      
     }
 
     public function calcPEF(Request $request)
     {
        $this->validate($request, array());
-        $Q=array($request->QJanuary,$request->QFebruary,$request->QMarch,$request->QApril, $request->QMay, $request->QJune, $request->QJuly, $request->QAugust, $request->QSeptember, $request->QOctober, $request->QNovember, $request->QDecember);
+        $QF=array($request->QFJanuary,$request->QFFebruary,$request->QFMarch,$request->QFApril, $request->QFMay, $request->QFJune, $request->QFJuly, $request->QFAugust, $request->QFSeptember, $request->QFOctober, $request->QFNovember, $request->QFDecember);
         $Q2=array($request->Q2January,$request->Q2February,$request->Q2March,$request->Q2April, $request->Q2May, $request->Q2June, $request->Q2July, $request->Q2August, $request->Q2September, $request->Q2October, $request->Q2November, $request->Q2December);
-        $h= array($request->hJanuary, $request->hFebruary, $request->hMarch, $request->hApril, $request->hMay, $request->hJune, $request->hJuly, $request->hAugust, $request->hSeptember, $request->hOctober, $request->hNovember, $request->hDecember);
-      
+        $W= array($request->WJanuary, $request->WFebruary, $request->WMarch, $request->WApril, $request->WMay, $request->WJune, $request->WJuly, $request->WAugust, $request->WSeptember, $request->WOctober, $request->WNovember, $request->WDecember);
+        
+        $fpf=$request->input($request->prf);
+        $fp=$request->input('Electrical_power');
+        settype($fpf,"float");
+        settype($fp,"float");
+        $sumQF=0;
+        $sumQ2=0;
+        $sumW=0;
+        foreach ($Q2 as $key => $value) {
+            $sumQF+=$QF[$key];
+            $sumQ2+=$Q2[$key];
+            $sumW+=$W[$key];
+
+        }
+        $pef=($sumQF*$fpf-$sumW*$fp)/$sumQ2;
         return json_encode($pef);
        
     }
@@ -163,8 +174,4 @@ public function calcRiL(Request $request)
      * @return \Illuminate\Http\Response
      */
     
-    public function getResult($arr){
-    	return view('calc.result')->withArr($arr);;
-    }
-
 }

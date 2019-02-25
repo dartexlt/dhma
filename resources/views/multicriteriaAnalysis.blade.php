@@ -28,7 +28,11 @@
 		<div  class="col-sm-6">
 			<div id="LineChart" class ="row mt-1">
 			</div>
-			<div id="BarChart" class ="row mt-1">
+			<div id="BarChartMA" class ="row mt-1">
+			</div>
+			<div id="BarChartRil" class ="row mt-1">
+			</div>
+			<div id="BarChartPef" class ="row mt-1">
 			</div>
 		</div>
 	</div>
@@ -38,7 +42,7 @@
 	$( window ).on( "load", function() {
 	$.ajax({
     		type : "GET",
-			url : "{{URL::to('search')}}",
+			url : "{{URL::to('region')}}",
 			data:{"all":0},
  			success:function(data){
  				$('tbody').empty();
@@ -53,7 +57,7 @@
 	    if(countryID){
 	    	$.ajax({
 	    		type : "GET",
-				url : "{{URL::to('search')}}",
+				url : "{{URL::to('region')}}",
 				data:{"country":countryID},
 	 			success:function(data){
 	 				$('tbody').empty();
@@ -69,7 +73,7 @@
 	    if(stateID){
 	        $.ajax({
 				type : "GET",
-				url : "{{URL::to('search')}}",
+				url : "{{URL::to('region')}}",
 				data:{"country":$('#country').val(), "state":stateID},
 	 			success:function(data){
 					$('tbody').empty();
@@ -86,7 +90,7 @@
 	    if(cityID){
 	        $.ajax({
 				type : "GET",
-				url : "{{URL::to('search')}}",
+				url : "{{URL::to('region')}}",
 				data:{"country":$('#country').val(),"state":$('#state').val(), "city":cityID},
 	 			success:function(data){
 	 				$('tbody').empty();
@@ -109,12 +113,23 @@
 		chart.draw(data, options);
 	}
 
-	function drawBarChart(data) {
+	function drawBarChartMA(data) {
 		var options = {'title' : 'Multicriteria ranking', 'hAxis' : {'title' : 'Region'},'vAxis': {'title' : 'Rank'}, 'height':300};
- 		var chart = new google.visualization.ColumnChart(document.getElementById('BarChart'));
+ 		var chart = new google.visualization.ColumnChart(document.getElementById('BarChartMA'));
 		chart.draw(data, options);
 	}
 
+	function drawBarChartRil(data) {
+		var options = {'title' : 'Relative Importance of Losses (RiL)', 'hAxis' : {'title' : 'Region'},'vAxis': {'title' : 'RiL'}, 'height':300};
+ 		var chart = new google.visualization.ColumnChart(document.getElementById('BarChartRil'));
+		chart.draw(data, options);
+	}
+
+	function drawBarChartPef(data) {
+		var options = {'title' : 'Primary Energy Factor (PEF)', 'hAxis' : {'title' : 'Region'},'vAxis': {'title' : 'PEF'}, 'height':300};
+ 		var chart = new google.visualization.ColumnChart(document.getElementById('BarChartPef'));
+		chart.draw(data, options);
+	}
 	$(document).ready(function() {
     	$('#evalueateButton').click(function (){
     		// Load google charts
@@ -133,15 +148,16 @@
 	    			data: {"ids":selected},
 	    			dataType: 'json',
 	    	 		success: function (dataTableJson) {
-
-	    	 			var bar=google.visualization.arrayToDataTable($.parseJSON(dataTableJson[0]));
-	    	 			drawBarChart(bar);
+	    	 			drawBarChartMA(google.visualization.arrayToDataTable($.parseJSON(dataTableJson.barMA)));
+	    	 			drawBarChartRil(google.visualization.arrayToDataTable($.parseJSON(dataTableJson.barRil)));
+	    	 			drawBarChartPef(google.visualization.arrayToDataTable($.parseJSON(dataTableJson.barPef)));
 	    	 			if (dataTableJson!=null){
-		    	 			var d1=google.visualization.arrayToDataTable($.parseJSON(dataTableJson[1]));
+	    	 				var loadJson=$.parseJSON(dataTableJson.load);
+	    	 				var d1=google.visualization.arrayToDataTable($.parseJSON(loadJson[0]));
 		    	 			var columns=[];
-		    	 			dataTableJson.forEach(function(dataTable, index) {
-		    	 				if (index > 1) {
-		    	 					columns.push(index-1);
+		    	 			loadJson.forEach(function(dataTable, index) {
+		    	 				if (index > 0) {
+		    	 					columns.push(index);
 	            					var d2=google.visualization.arrayToDataTable($.parseJSON(dataTable));
 		    	 					d1=google.visualization.data.join(d1,d2,'full',[[0,0]],columns,[1]);
 								}
